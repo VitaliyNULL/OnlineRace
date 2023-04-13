@@ -5038,7 +5038,6 @@ GameObject:
   - component: {fileID: 400042}
   - component: {fileID: 3300042}
   - component: {fileID: 2300042}
-  - component: {fileID: 6500038}
   m_Layer: 0
   m_Name: RoadBlock_D
   m_TagString: Untagged
@@ -5111,19 +5110,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6500038
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100102}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6929224, y: 1.4126828, z: 0.8265623}
-  m_Center: {x: 0.0000019818544, y: -0.0000015199183, z: 0.413284}
 --- !u!1 &100104
 GameObject:
   m_ObjectHideFlags: 0
@@ -5135,7 +5121,6 @@ GameObject:
   - component: {fileID: 400118}
   - component: {fileID: 3300110}
   - component: {fileID: 2300110}
-  - component: {fileID: 6500104}
   m_Layer: 0
   m_Name: RoadBlock_D
   m_TagString: Untagged
@@ -5208,19 +5193,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6500104
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100104}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6929224, y: 1.4126828, z: 0.8265623}
-  m_Center: {x: 0.0000019818544, y: -0.0000015199183, z: 0.413284}
 --- !u!1 &100106
 GameObject:
   m_ObjectHideFlags: 0
@@ -5232,7 +5204,6 @@ GameObject:
   - component: {fileID: 400082}
   - component: {fileID: 3300080}
   - component: {fileID: 2300080}
-  - component: {fileID: 6500076}
   m_Layer: 0
   m_Name: RoadBlock_D
   m_TagString: Untagged
@@ -5305,19 +5276,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6500076
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100106}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6929224, y: 1.4126828, z: 0.8265623}
-  m_Center: {x: 0.0000019818544, y: -0.0000015199183, z: 0.413284}
 --- !u!1 &100108
 GameObject:
   m_ObjectHideFlags: 0
@@ -5329,7 +5287,6 @@ GameObject:
   - component: {fileID: 400090}
   - component: {fileID: 3300086}
   - component: {fileID: 2300086}
-  - component: {fileID: 6500082}
   m_Layer: 0
   m_Name: RoadBlock_D
   m_TagString: Untagged
@@ -5402,19 +5359,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6500082
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100108}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6929224, y: 1.4126828, z: 0.8265623}
-  m_Center: {x: 0.0000019818544, y: -0.0000015199183, z: 0.413284}
 --- !u!1 &100110
 GameObject:
   m_ObjectHideFlags: 0
@@ -5426,7 +5370,6 @@ GameObject:
   - component: {fileID: 400012}
   - component: {fileID: 3300012}
   - component: {fileID: 2300012}
-  - component: {fileID: 6500010}
   m_Layer: 0
   m_Name: RoadBlock_D
   m_TagString: Untagged
@@ -5499,19 +5442,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6500010
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100110}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6929224, y: 1.4126828, z: 0.8265623}
-  m_Center: {x: 0.0000019818544, y: -0.0000015199183, z: 0.413284}
 --- !u!1 &100112
 GameObject:
   m_ObjectHideFlags: 0
@@ -5523,7 +5453,6 @@ GameObject:
   - component: {fileID: 400056}
   - component: {fileID: 3300056}
   - component: {fileID: 2300056}
-  - component: {fileID: 6500052}
   m_Layer: 0
   m_Name: RoadBlock_D
   m_TagString: Untagged
@@ -5596,19 +5525,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6500052
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100112}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6929224, y: 1.4126828, z: 0.8265623}
-  m_Center: {x: 0.0000019818544, y: -0.0000015199183, z: 0.413284}
 --- !u!1 &100114
 GameObject:
   m_ObjectHideFlags: 0
@@ -5620,7 +5536,6 @@ GameObject:
   - component: {fileID: 400074}
   - component: {fileID: 3300074}
   - component: {fileID: 2300074}
-  - component: {fileID: 6500070}
   m_Layer: 0
   m_Name: RoadBlock_D
   m_TagString: Untagged
@@ -5693,19 +5608,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6500070
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100114}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6929224, y: 1.4126828, z: 0.8265623}
-  m_Center: {x: 0.0000019818544, y: -0.0000015199183, z: 0.413284}
 --- !u!1 &100116
 GameObject:
   m_ObjectHideFlags: 0
@@ -5717,7 +5619,6 @@ GameObject:
   - component: {fileID: 400036}
   - component: {fileID: 3300036}
   - component: {fileID: 2300036}
-  - component: {fileID: 6500032}
   m_Layer: 0
   m_Name: RoadBlock_D
   m_TagString: Untagged
@@ -5790,19 +5691,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6500032
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100116}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6929224, y: 1.4126828, z: 0.8265623}
-  m_Center: {x: 0.0000019818544, y: -0.0000015199183, z: 0.413284}
 --- !u!1 &100118
 GameObject:
   m_ObjectHideFlags: 0
@@ -5814,7 +5702,6 @@ GameObject:
   - component: {fileID: 400046}
   - component: {fileID: 3300046}
   - component: {fileID: 2300046}
-  - component: {fileID: 6500042}
   m_Layer: 0
   m_Name: RoadBlock_D
   m_TagString: Untagged
@@ -5887,19 +5774,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6500042
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100118}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.6929224, y: 1.4126828, z: 0.8265623}
-  m_Center: {x: 0.0000019818544, y: -0.0000015199183, z: 0.413284}
 --- !u!1 &100120
 GameObject:
   m_ObjectHideFlags: 0
@@ -5996,7 +5870,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100120}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.6091882, y: 0.6025427, z: 4.842849}
@@ -6097,7 +5971,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100122}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.6091882, y: 0.6025427, z: 4.842849}
