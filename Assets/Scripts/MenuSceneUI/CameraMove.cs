@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -5,8 +6,27 @@ namespace VitaliyNULL.MenuSceneUI
 {
     public class CameraMove : MonoBehaviour
     {
+        private readonly string CAR_SKIN = "CAR_SKIN";
+        [SerializeField] private CarSelectButton carSelectButton;
         private float _moveForce = 20f;
         private bool _isMoving = false;
+        private int _carIndex;
+
+        private void Start()
+        {
+            if (PlayerPrefs.HasKey(CAR_SKIN))
+            {
+                _carIndex = PlayerPrefs.GetInt(CAR_SKIN);
+                carSelectButton.SetCar(_carIndex);
+                transform.position = new Vector3(transform.position.x + _moveForce * _carIndex,transform.position.y,transform.position.z);
+            }
+            else
+            {
+                _carIndex = 0;
+                carSelectButton.SetCar(0);
+            }
+          
+        }
 
         public void MoveLeft()
         {
@@ -19,6 +39,7 @@ namespace VitaliyNULL.MenuSceneUI
                 _isMoving = true;
                 Debug.Log("MoveLeft");
                 StartCoroutine(StartMoveLeft());
+               
             }
         }
 
@@ -30,6 +51,7 @@ namespace VitaliyNULL.MenuSceneUI
                 _isMoving = true;
                 Debug.Log("MoveRight");
                 StartCoroutine(StartMoveRight());
+                
             }
         }
 
@@ -42,8 +64,11 @@ namespace VitaliyNULL.MenuSceneUI
                 transform.Translate(-_moveForce * Time.deltaTime, 0, 0);
                 yield return new WaitForEndOfFrame();
             }
+
             transform.position = new Vector3(toMove, transform.position.y, transform.position.z);
             _isMoving = false;
+            _carIndex--;
+            carSelectButton.SetCar(_carIndex);
         }
 
         private IEnumerator StartMoveRight()
@@ -58,6 +83,8 @@ namespace VitaliyNULL.MenuSceneUI
 
             transform.position = new Vector3(toMove, transform.position.y, transform.position.z);
             _isMoving = false;
+            _carIndex++;
+            carSelectButton.SetCar(_carIndex);
         }
     }
 }
