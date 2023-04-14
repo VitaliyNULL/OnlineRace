@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace VitaliyNULL.MenuSceneUI
+namespace VitaliyNULL.MenuSceneUI.Garage
 {
     public class CarInMainMenu: MonoBehaviour
     {

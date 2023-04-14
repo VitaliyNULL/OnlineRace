@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace VitaliyNULL.MenuSceneUI
+namespace VitaliyNULL.MenuSceneUI.Garage
 {
     public class CarSelectButton : MonoBehaviour
     {

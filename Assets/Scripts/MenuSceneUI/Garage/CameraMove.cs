@@ -1,8 +1,7 @@
-using System;
 using System.Collections;
 using UnityEngine;
 
-namespace VitaliyNULL.MenuSceneUI
+namespace VitaliyNULL.MenuSceneUI.Garage
 {
     public class CameraMove : MonoBehaviour
     {

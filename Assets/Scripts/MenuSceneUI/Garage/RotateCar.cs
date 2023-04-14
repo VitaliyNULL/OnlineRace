@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace VitaliyNULL.MenuSceneUI
+namespace VitaliyNULL.MenuSceneUI.Garage
 {
     public class RotateCar : MonoBehaviour
     {

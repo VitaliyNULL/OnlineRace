@@ -1,20 +1,19 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace VitaliyNULL.MenuSceneUI
+namespace VitaliyNULL.MenuSceneUI.Garage
 {
-    public class ExitFromGarageButton : MonoBehaviour
+    public class GarageButton: MonoBehaviour
     {
         [SerializeField] private GameObject currentUI;
-        [SerializeField] private GameObject mainMenuUI;
+        [SerializeField] private GameObject garageUI;
 
         private void Start()
         {
             GetComponent<Button>().onClick.AddListener((() =>
             {
                 currentUI.SetActive(false);
-                mainMenuUI.SetActive(true);
+                garageUI.SetActive(true);
             }));
         }
     }
