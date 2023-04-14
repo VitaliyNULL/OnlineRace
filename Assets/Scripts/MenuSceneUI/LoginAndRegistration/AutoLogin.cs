@@ -25,6 +25,7 @@ namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
             }
             else
             {
+                loadingUI.SetActive(false);
                 registrationUI.SetActive(true);
             }
         }

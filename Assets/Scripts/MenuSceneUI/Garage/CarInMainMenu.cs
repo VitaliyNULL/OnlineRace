@@ -48,6 +48,7 @@ namespace VitaliyNULL.MenuSceneUI.Garage
         {
             foreach (var car in _carsForUse)
             {
+                if(car==null) return;
                 car.gameObject.SetActive(false);
             }
         }

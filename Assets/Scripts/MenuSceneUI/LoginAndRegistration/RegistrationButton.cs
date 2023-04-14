@@ -16,12 +16,15 @@ namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
         private void Start()
         {
             GetComponent<Button>().onClick.AddListener(() =>
+            {
+                firebaseManager.InitializeFirebase();
                 firebaseManager.RegisterButton(emailInput, passwordInput, confirmPasswordInput, warningUI,
                     () =>
                     {
                         registrationUI.SetActive(false);
                         mainMenuUI.SetActive(true);
-                    }));
+                    });
+            });
         }
     }
 }

@@ -89,6 +89,45 @@ namespace VitaliyNULL.FirebaseManager
             StartCoroutine(WaitForRegister(emailInput, passwordInput, confirmPasswordInput, warningUI, openMainMenu));
         }
 
+        public void ExitAccount(UnityAction openLoginWindow)
+        {
+            _auth.SignOut();
+            PlayerPrefs.DeleteAll();
+            //TODO : Reset rating
+            //TODO: Open login window
+            openLoginWindow.Invoke();
+        }
+
+        public void SaveData()
+        {
+            if (!_isSavingData)
+            {
+                _isSavingData = true;
+                StartCoroutine(UpdateUsernameAuth(_auth.CurrentUser.DisplayName));
+                StartCoroutine(UpdateUsernameDatabase(_auth.CurrentUser.DisplayName));
+                //TODO: Get rating
+                // StartCoroutine(UpdateBestScore(ScoreManager.Instance.GetBestScore()));
+            }
+        }
+
+        public void RegisterNewAccount()
+        {
+            _auth.SignOut();
+            // ScoreManager.Instance.ResetBestScoreForNewCustomer();
+            //TODO : reset rating for new customer
+            // UIManager.Instance.OpenRegistrationWindow();
+            //TODO: Open Registration
+        }
+
+        public void SignInExistingAccount()
+        {
+            _auth.SignOut();
+            // ScoreManager.Instance.ResetBestScoreForNewCustomer();
+            //TODO : reset rating for new customer
+            // UIManager.Instance.OpenAuthWindow();
+            //TODO: Open Login window
+        }
+
         #endregion
 
 
@@ -146,6 +185,7 @@ namespace VitaliyNULL.FirebaseManager
                 StartCoroutine(LoadUserData());
                 // StartCoroutine(LoadScoreBoardData());
                 //TODO: Open MainMenu
+                openMainMenu.Invoke();
             }
         }
 
@@ -200,7 +240,6 @@ namespace VitaliyNULL.FirebaseManager
                 //Now get the result
                 _user = loginTask.Result;
                 Debug.LogFormat("User signed in successfully: {0} ({1})", _user.DisplayName, _user.Email);
-                warningUI.ClearWarningText();
                 StartCoroutine(LoadUserData());
                 // StartCoroutine(LoadScoreBoardData());
                 PlayerPrefs.SetString(_passwordKey, passwordInput.password);
@@ -273,50 +312,10 @@ namespace VitaliyNULL.FirebaseManager
                         PlayerPrefs.SetString(_emailKey, emailInput.email);
                         //TODO: OpenMainMenu
                         openMainMenu.Invoke();
-                        warningUI.ChangeWarningText("");
+                        
                     }
                 }
             }
-        }
-
-        #endregion
-
-        public void ExitAccount()
-        {
-            _auth.SignOut();
-            PlayerPrefs.DeleteAll();
-            //TODO : Reset rating
-            //TODO: Open login window
-        }
-
-        public void SaveData()
-        {
-            if (!_isSavingData)
-            {
-                _isSavingData = true;
-                StartCoroutine(UpdateUsernameAuth(_auth.CurrentUser.DisplayName));
-                StartCoroutine(UpdateUsernameDatabase(_auth.CurrentUser.DisplayName));
-                //TODO: Get rating
-                // StartCoroutine(UpdateBestScore(ScoreManager.Instance.GetBestScore()));
-            }
-        }
-
-        public void RegisterNewAccount()
-        {
-            _auth.SignOut();
-            // ScoreManager.Instance.ResetBestScoreForNewCustomer();
-            //TODO : reset rating for new customer
-            // UIManager.Instance.OpenRegistrationWindow();
-            //TODO: Open Registration
-        }
-
-        public void SignInExistingAccount()
-        {
-            _auth.SignOut();
-            // ScoreManager.Instance.ResetBestScoreForNewCustomer();
-            //TODO : reset rating for new customer
-            // UIManager.Instance.OpenAuthWindow();
-            //TODO: Open Login window
         }
 
         private IEnumerator UpdateUsernameAuth(string username)
@@ -345,20 +344,6 @@ namespace VitaliyNULL.FirebaseManager
 
             _isSavingData = false;
         }
-
-        //TODO: Make updating for rating
-        // private IEnumerator UpdateBestScore(int bestScore)
-        // {
-        //     var databaseTask = _dataBaseReference.Child("users").Child(_user.UserId).Child("bestScore")
-        //         .SetValueAsync(bestScore);
-        //     yield return new WaitUntil(predicate: () => databaseTask.IsCompleted);
-        //     if (databaseTask.Exception != null)
-        //     {
-        //         Debug.LogWarning($"Failed to register task with {databaseTask.Exception}");
-        //     }
-        //
-        //     _isSavingData = false;
-        // }
 
         private IEnumerator LoadUserData()
         {
@@ -405,5 +390,22 @@ namespace VitaliyNULL.FirebaseManager
                 }
             }
         }
+
+        #endregion
+
+
+        //TODO: Make updating for rating
+        // private IEnumerator UpdateBestScore(int bestScore)
+        // {
+        //     var databaseTask = _dataBaseReference.Child("users").Child(_user.UserId).Child("bestScore")
+        //         .SetValueAsync(bestScore);
+        //     yield return new WaitUntil(predicate: () => databaseTask.IsCompleted);
+        //     if (databaseTask.Exception != null)
+        //     {
+        //         Debug.LogWarning($"Failed to register task with {databaseTask.Exception}");
+        //     }
+        //
+        //     _isSavingData = false;
+        // }
     }
 }
