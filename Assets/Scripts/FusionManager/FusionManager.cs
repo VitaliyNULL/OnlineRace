@@ -4,6 +4,7 @@ using Fusion;
 using Fusion.Sockets;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VitaliyNULL.MapGeneration;
 
 namespace VitaliyNULL.FusionManager
 {
@@ -11,6 +12,7 @@ namespace VitaliyNULL.FusionManager
     {
         private NetworkRunner _runner;
         private string _sceneName = "GameScene";
+        private const string MAPGENERATOR_PATH = "MapGenerator";
 
         public void AutoPlay()
         {
@@ -35,6 +37,7 @@ namespace VitaliyNULL.FusionManager
 
         public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
         {
+            runner.Spawn(Resources.Load<MapGenerator>(MAPGENERATOR_PATH));
         }
 
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
