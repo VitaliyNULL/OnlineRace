@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Linq;
 using Firebase;
@@ -25,40 +26,14 @@ namespace VitaliyNULL.FirebaseManager
 
         #endregion
 
+        #region MonoBehaviour Callbacks
 
-        //Login variables
-        // [Header("Login")] public TMP_InputField emailLoginField;
-        // public TMP_InputField passwordLoginField;
-        // public TMP_Text warningLoginText;
-        // public TMP_Text confirmLoginText;
+        private void Start()
+        {
+            DontDestroyOnLoad(this);
+        }
 
-        //Register variables
-        // [Header("Register")] public TMP_InputField usernameRegisterField;
-
-        // public TMP_InputField emailRegisterField;
-        // public TMP_InputField passwordRegisterField;
-        // public TMP_InputField passwordRegisterVerifyField;
-        // public TMP_Text warningRegisterText;
-
-        //TODO: Make start in other managers
-        // void Start()
-        // {
-        //     //TODO: Loading UI for login 
-        //     InitializeFirebase();
-        //     //TODO: Login in other Managers
-        //     if (PlayerPrefs.HasKey(_emailKey))
-        //     {
-        //         _isAutoLogin = true;
-        //         StartCoroutine(AutoLogin(PlayerPrefs.GetString(_emailKey), PlayerPrefs.GetString(_passwordKey)));
-        //     }
-        //     else
-        //     {
-        //         //TODO: Go to Registration window
-        //     }
-        //
-        //     //TODO: : Load LeaderBoard
-        //     // StartCoroutine(LoadScoreBoardData());
-        // }
+        #endregion
 
         #region Public Methods
 
