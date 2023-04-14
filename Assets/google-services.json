@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "394848570721",
+    "firebase_url": "https://onlinerace-4322c-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "onlinerace-4322c",
+    "storage_bucket": "onlinerace-4322c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394848570721:android:5dbab6474ec3b556900920",
+        "android_client_info": {
+          "package_name": "com.VitaliyNULL.OnlineRace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "394848570721-k1mb6bh7m92doeokp9j3o5jjr5hh8n88.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCr0p7gso4EAlPELSV7A-mdoOhADMlWHYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "394848570721-k1mb6bh7m92doeokp9j3o5jjr5hh8n88.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
