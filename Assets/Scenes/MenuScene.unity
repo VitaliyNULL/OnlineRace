@@ -338,6 +338,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93efb9f84b7345b1896be26e58c0909a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carPrefab:
+    RawGuidValue: 770232b501091b543b472d3430f48f86
 --- !u!4 &66579801
 Transform:
   m_ObjectHideFlags: 0
@@ -7370,6 +7372,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 415001978}
     m_Modifications:
+    - target: {fileID: -110372282654109514, guid: 9ea2ea91c8ce9fa41abab502c21dce33, type: 3}
+      propertyPath: Flags
+      value: 133633
+      objectReference: {fileID: 0}
+    - target: {fileID: -110372282654109514, guid: 9ea2ea91c8ce9fa41abab502c21dce33, type: 3}
+      propertyPath: NetworkGuid.RawGuidValue.Array.data[0]
+      value: 7011139169863913957
+      objectReference: {fileID: 0}
+    - target: {fileID: -110372282654109514, guid: 9ea2ea91c8ce9fa41abab502c21dce33, type: 3}
+      propertyPath: NetworkGuid.RawGuidValue.Array.data[1]
+      value: -4623123107957502046
+      objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 9ea2ea91c8ce9fa41abab502c21dce33, type: 3}
       propertyPath: m_Name
       value: Car1 (1)
@@ -8969,6 +8983,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3767185947882882569, guid: 78c52d75dd378514fae467e817d88db4, type: 3}
+      propertyPath: Flags
+      value: 133633
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767185947882882569, guid: 78c52d75dd378514fae467e817d88db4, type: 3}
+      propertyPath: NetworkGuid.RawGuidValue.Array.data[0]
+      value: -3439732897467124286
+      objectReference: {fileID: 0}
+    - target: {fileID: 3767185947882882569, guid: 78c52d75dd378514fae467e817d88db4, type: 3}
+      propertyPath: NetworkGuid.RawGuidValue.Array.data[1]
+      value: -702849627052884330
+      objectReference: {fileID: 0}
     - target: {fileID: 5345873187750942292, guid: 78c52d75dd378514fae467e817d88db4, type: 3}
       propertyPath: m_RootOrder
       value: 9

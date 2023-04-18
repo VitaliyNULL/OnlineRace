@@ -1,3 +1,4 @@
+using System;
 using Fusion;
 using UnityEngine;
 
@@ -9,9 +10,14 @@ namespace VitaliyNULL.Props
         public float speed;
         private Vector3 _directionToMove;
 
+        private void Awake()
+        {
+            _rigidbody ??= GetComponent<NetworkRigidbody>();
+        }
+
         public override void Spawned()
         {
-            _rigidbody = GetComponent<NetworkRigidbody>();
+            _rigidbody ??= GetComponent<NetworkRigidbody>();
             if (_rigidbody.Rigidbody.rotation.y > 0 || _rigidbody.Rigidbody.rotation.y < 0)
             {
                 _directionToMove = -Vector3.forward;
@@ -27,7 +33,9 @@ namespace VitaliyNULL.Props
             if (_rigidbody.Rigidbody.position.z > 6000 || _rigidbody.Rigidbody.position.z < 0)
             {
                 Runner.Despawn(Object);
+                return;
             }
+
             _rigidbody.Rigidbody.MovePosition(
                 _rigidbody.Rigidbody.position + _directionToMove * speed * Runner.DeltaTime);
         }

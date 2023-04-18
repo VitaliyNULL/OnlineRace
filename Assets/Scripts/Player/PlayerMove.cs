@@ -1,0 +1,94 @@
+using System;
+using System.Collections;
+using Cinemachine;
+using Fusion;
+using UnityEngine;
+using VitaliyNULL.Core;
+
+namespace VitaliyNULL.Player
+{
+    public class PlayerMove : NetworkBehaviour
+    {
+        private readonly float[] _toMoveXPositions = { -8, -3, 3, 8 };
+        private int _currentPositionIndex;
+        private bool _isMoving = false;
+        private float _sideMoveSpeed = 10f;
+        private NetworkRigidbody _rigidbody;
+
+        private void Awake()
+        {
+            _rigidbody ??= GetComponent<NetworkRigidbody>();
+        }
+
+        public override void Spawned()
+        {
+            _rigidbody ??= GetComponent<NetworkRigidbody>();
+            _currentPositionIndex = 0;
+            CinemachineVirtualCamera Camera = FindObjectOfType<CinemachineVirtualCamera>();
+            Camera.Follow = transform;
+            Camera.LookAt = transform;
+        }
+
+        public override void FixedUpdateNetwork()
+        {
+            if (GetInput(out NetworkInputData data))
+            {
+                if ((data.ToMoveX & NetworkInputData.MOVE_LEFT) != 0 && !_isMoving)
+                {
+                    if (_currentPositionIndex != 0)
+                    {
+                        Debug.Log("Move Left");
+                        _isMoving = true;
+                        _currentPositionIndex--;
+                        StartCoroutine(StartMovingLeft(_toMoveXPositions[_currentPositionIndex]));
+                    }
+                }
+                else if ((data.ToMoveX & NetworkInputData.MOVE_RIGHT) != 0 && !_isMoving)
+                {
+                    if (_currentPositionIndex != _toMoveXPositions.Length - 1)
+                    {
+                        Debug.Log("Move Right");
+                        _isMoving = true;
+                        _currentPositionIndex++;
+                        StartCoroutine(StartMovingRight(_toMoveXPositions[_currentPositionIndex]));
+                    }
+                }
+            }
+        }
+
+        private IEnumerator StartMovingLeft(float toMoveX)
+        {
+            float xPositionToMove = _rigidbody.Rigidbody.position.x;
+            while (_rigidbody.Rigidbody.position.x > toMoveX)
+            {
+                xPositionToMove -= Mathf.Abs(_sideMoveSpeed * Runner.DeltaTime);
+                _rigidbody.Rigidbody.MovePosition(new Vector3(xPositionToMove, _rigidbody.Rigidbody.position.y,
+                    _rigidbody.Rigidbody.position.z));
+
+                yield return new WaitForEndOfFrame();
+            }
+
+            _rigidbody.Rigidbody.position =
+                new Vector3(toMoveX, _rigidbody.Rigidbody.position.y, _rigidbody.Rigidbody.position.z);
+            _isMoving = false;
+        }
+
+
+        private IEnumerator StartMovingRight(float toMoveX)
+        {
+            float xPositionToMove = _rigidbody.Rigidbody.position.x;
+            while (_rigidbody.Rigidbody.position.x < toMoveX)
+            {
+                xPositionToMove += Mathf.Abs(_sideMoveSpeed * Runner.DeltaTime);
+                _rigidbody.Rigidbody.MovePosition(new Vector3(xPositionToMove, _rigidbody.Rigidbody.position.y,
+                    _rigidbody.Rigidbody.position.z));
+
+                yield return new WaitForEndOfFrame();
+            }
+
+            _rigidbody.Rigidbody.position =
+                new Vector3(toMoveX, _rigidbody.Rigidbody.position.y, _rigidbody.Rigidbody.position.z);
+            _isMoving = false;
+        }
+    }
+}

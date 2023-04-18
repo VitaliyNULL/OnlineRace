@@ -5,23 +5,16 @@ using Fusion.Sockets;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VitaliyNULL.Core;
-using VitaliyNULL.MapGeneration;
 
-namespace VitaliyNULL.FusionManager
+namespace VitaliyNULL.Test
 {
-    public class FusionManager : MonoBehaviour, INetworkRunnerCallbacks
+    public class TestNetworkRunner : MonoBehaviour, INetworkRunnerCallbacks
     {
         [SerializeField] private NetworkPrefabRef carPrefab;
-        private NetworkRunner _runner;
-        private string _sceneName = "GameScene";
-        private const string MAPGENERATOR_PATH = "MapGenerator";
+
+        private NetworkRunner _networkRunner;
         private bool _leftMove = false;
         private bool _rightMove = false;
-
-        public void AutoPlay()
-        {
-            StartGame(GameMode.AutoHostOrClient);
-        }
 
         private void Update()
         {
@@ -29,25 +22,21 @@ namespace VitaliyNULL.FusionManager
             _rightMove |= Input.GetKey(KeyCode.D);
         }
 
-        async void StartGame(GameMode mode)
+        private async void Start()
         {
-            // Create the Fusion runner and let it know that we will be providing user input
-            _runner = gameObject.AddComponent<NetworkRunner>();
-            _runner.ProvideInput = true;
-
-            // Start or join (depends on gamemode) a session with a specific name
-            await _runner.StartGame(new StartGameArgs()
+            _networkRunner = gameObject.AddComponent<NetworkRunner>();
+            _networkRunner.ProvideInput = true;
+            await _networkRunner.StartGame(new StartGameArgs()
             {
-                GameMode = mode,
+                GameMode = GameMode.AutoHostOrClient,
                 SessionName = "TestRoom",
-                Scene = SceneUtility.GetBuildIndexByScenePath($"Scenes/{_sceneName}"),
+                Scene = SceneManager.GetActiveScene().buildIndex,
                 SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
             });
         }
 
         public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
         {
-            runner.Spawn(Resources.Load<MapGenerator>(MAPGENERATOR_PATH));
             runner.Spawn(carPrefab, new Vector3(-8, 4, 0), Quaternion.identity, player);
         }
 
@@ -71,7 +60,6 @@ namespace VitaliyNULL.FusionManager
             _leftMove = false;
             _rightMove = false;
             input.Set(data);
-            Debug.Log("Input");
         }
 
         public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)
