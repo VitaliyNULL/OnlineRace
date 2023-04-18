@@ -7,6 +7,7 @@ namespace VitaliyNULL.MenuSceneUI.Garage
     {
         [SerializeField] private GameObject currentUI;
         [SerializeField] private GameObject garageUI;
+        [SerializeField] private GameObject carsInGarageUI;
 
         private void Start()
         {
@@ -14,6 +15,7 @@ namespace VitaliyNULL.MenuSceneUI.Garage
             {
                 currentUI.SetActive(false);
                 garageUI.SetActive(true);
+                carsInGarageUI.SetActive(true);
             }));
         }
     }

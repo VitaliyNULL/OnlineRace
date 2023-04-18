@@ -7,6 +7,7 @@ namespace VitaliyNULL.MenuSceneUI.Garage
     {
         [SerializeField] private GameObject currentUI;
         [SerializeField] private GameObject mainMenuUI;
+        [SerializeField] private GameObject carsInGarageUI;
         private readonly string CAR_SKIN = "CAR_SKIN";
         [HideInInspector] public CarEnum carEnum = 0;
 
@@ -23,6 +24,7 @@ namespace VitaliyNULL.MenuSceneUI.Garage
                 PlayerPrefs.SetInt(CAR_SKIN, (int)carEnum);
                 currentUI.SetActive(false);
                 mainMenuUI.SetActive(true);
+                carsInGarageUI.SetActive(false);
                 Debug.Log($"Current car with index {carEnum}");
             });
         }
