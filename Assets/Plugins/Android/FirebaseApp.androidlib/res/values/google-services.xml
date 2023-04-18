@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
+  <string name="firebase_database_url" translatable="false">https://onlinerace-4322c-default-rtdb.europe-west1.firebasedatabase.app</string>
+  <string name="gcm_defaultSenderId" translatable="false">394848570721</string>
+  <string name="google_storage_bucket" translatable="false">onlinerace-4322c.appspot.com</string>
+  <string name="project_id" translatable="false">onlinerace-4322c</string>
+  <string name="google_api_key" translatable="false">AIzaSyCr0p7gso4EAlPELSV7A-mdoOhADMlWHYc</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCr0p7gso4EAlPELSV7A-mdoOhADMlWHYc</string>
+  <string name="google_app_id" translatable="false">1:394848570721:android:5dbab6474ec3b556900920</string>
+  <string name="default_web_client_id" translatable="false">394848570721-k1mb6bh7m92doeokp9j3o5jjr5hh8n88.apps.googleusercontent.com</string>
+</resources>
