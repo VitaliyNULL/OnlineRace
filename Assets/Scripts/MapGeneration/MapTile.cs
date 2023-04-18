@@ -3,14 +3,23 @@ using UnityEngine;
 
 namespace VitaliyNULL.MapGeneration
 {
-    public class MapTile: NetworkBehaviour
+    public class MapTile : NetworkBehaviour
     {
         [SerializeField] private PropsGenerator propsGenerator;
-        public override void Spawned()
+
+        public void GenerateTile()
         {
-            //TODO : Make random spawned objects on this tile
             propsGenerator.GenerateTileProps();
         }
-        
+
+        public void GenerateFinish()
+        {
+            Debug.Log("Generated Finish");
+        }
+
+        public void GenerateStart()
+        {
+            Debug.Log("Generated Start");
+        }
     }
 }

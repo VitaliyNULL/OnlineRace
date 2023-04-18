@@ -29,7 +29,7 @@ namespace VitaliyNULL.MapGeneration
                 }
 
                 _spawnedProps[spawnPoint] = true;
-                Runner.Spawn(props[Random.Range(0, props.Count)], spawnPoint.transform.position, Quaternion.identity);
+                Runner.Spawn(props[Random.Range(0, props.Count)], spawnPoint.transform.position, spawnPoint.gameObject.transform.rotation);
             }
         }
     }

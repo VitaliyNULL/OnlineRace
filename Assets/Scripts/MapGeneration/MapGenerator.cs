@@ -23,7 +23,20 @@ namespace VitaliyNULL.MapGeneration
             int nextZ = _startZ;
             for (int i = 0; i < _tilecount; i++)
             {
-                Runner.Spawn(mapTiles[0], new Vector3(0, -12, nextZ), Quaternion.identity);
+                MapTile mapTile = Runner.Spawn(mapTiles[0], new Vector3(0, -12, nextZ), Quaternion.identity);
+                mapTile.name = String.Format($"RoadTile {i}");
+                if (i == 0)
+                {
+                    mapTile.GenerateStart();
+                }
+                else if (i == _tilecount - 10)
+                {
+                    mapTile.GenerateFinish();
+                }
+                else if (i > 6)
+                {
+                    mapTile.GenerateTile();
+                }
                 nextZ += _step;
             }
         }

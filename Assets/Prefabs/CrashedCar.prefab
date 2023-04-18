@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 5555488924492320672}
   - component: {fileID: 8911761772211243770}
   - component: {fileID: 343895519302362787}
+  - component: {fileID: 3936781463624010528}
   m_Layer: 0
   m_Name: CarBody
   m_TagString: Untagged
@@ -170,3 +171,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3936781463624010528
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4364068041421037444}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.4349554, y: 2.191531, z: 7.161528}
+  m_Center: {x: 0, y: 0, z: 0}
