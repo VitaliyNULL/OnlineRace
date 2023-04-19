@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace VitaliyNULL.FusionManager
         #region Private Fields
 
         [SerializeField] private NetworkPrefabRef _prefabRef;
+        [SerializeField] private List<Player.Player> _players = new List<Player.Player>();
 
         #endregion
 
@@ -30,8 +32,20 @@ namespace VitaliyNULL.FusionManager
                 {
                     Vector3 spawnPosition =
                         new Vector3(3 + (player.RawEncoded % Runner.Config.Simulation.DefaultPlayers) * 5, -7, 0);
-                    Runner.Spawn(_prefabRef, spawnPosition, Quaternion.identity, player);
+                    NetworkObject networkObject = Runner.Spawn(_prefabRef, spawnPosition, Quaternion.identity, player);
+                    RPC_UpdatePlayerLis(networkObject.GetComponent<Player.Player>());
                 }
+            }
+        }
+
+        [Rpc]
+        private void RPC_UpdatePlayerLis(Player.Player player)
+        {
+            _players.Add(player);
+            if (player.Object.InputAuthority.PlayerId == Object.InputAuthority.PlayerId)
+            {
+                Debug.LogError(player.Object.InputAuthority.PlayerId + " " + Object.InputAuthority.PlayerId);
+                player.InitGameManager(this);
             }
         }
     }
