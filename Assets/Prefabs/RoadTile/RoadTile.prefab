@@ -330,17 +330,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  spawnPoints:
+  _spawnPoints:
   - {fileID: 3903998834889070076}
   - {fileID: 3557523116879347278}
   - {fileID: 5004273755855952080}
   - {fileID: 6872636081325584566}
-  props:
-  - {fileID: 5330549557284671646, guid: 4c5026dced462444c967efc08eb5d55e, type: 3}
+  _props:
   - {fileID: 6872732388041705845, guid: b200cddbfaf002441af7a30424d68508, type: 3}
-  - {fileID: -3643018551652666905, guid: 8912a723dd772fb49839ef7cc73349fc, type: 3}
-  - {fileID: -5536277454867365731, guid: 25e1bf779ba4f6c4dbc9fc56aec752e3, type: 3}
   - {fileID: 9202631788587894117, guid: 43b83a74a6a998c40ba15b534e2829b4, type: 3}
+  - {fileID: -5536277454867365731, guid: 25e1bf779ba4f6c4dbc9fc56aec752e3, type: 3}
+  - {fileID: 5330549557284671646, guid: 4c5026dced462444c967efc08eb5d55e, type: 3}
+  - {fileID: -3643018551652666905, guid: 8912a723dd772fb49839ef7cc73349fc, type: 3}
   - {fileID: 933174304702208263, guid: 9df38475fc7aa96458f2f089552b1d23, type: 3}
 --- !u!114 &7563890132024226688
 MonoBehaviour:
@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  propsGenerator: {fileID: 1168451415630487596}
+  _propsGenerator: {fileID: 1168451415630487596}
   previousMapTile: {fileID: 0}
   nextMapTile: {fileID: 0}
 --- !u!114 &1681670394226013840

@@ -258,9 +258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af9f5242385c4c3ebd68eb9cbebd1f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentUI: {fileID: 1157359433}
-  mainMenuUI: {fileID: 2126427905}
-  carsInGarageUI: {fileID: 445988726}
+  _currentUI: {fileID: 1157359433}
+  _mainMenuUI: {fileID: 2126427905}
+  _carsInGarageUI: {fileID: 445988726}
 --- !u!1 &40620360
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,10 +290,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef5a1a6aa67a4a909aad0abda6c774df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firebaseManager: {fileID: 1354983579}
-  loadingUI: {fileID: 1667259431}
-  mainMenuUI: {fileID: 2126427905}
-  registrationUI: {fileID: 606647979}
+  _firebaseManager: {fileID: 1354983579}
+  _loadingUI: {fileID: 1667259431}
+  _mainMenuUI: {fileID: 2126427905}
+  _registrationUI: {fileID: 606647979}
 --- !u!4 &40620362
 Transform:
   m_ObjectHideFlags: 0
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93efb9f84b7345b1896be26e58c0909a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carPrefab:
+  _carPrefab:
     RawGuidValue: 770232b501091b543b472d3430f48f86
 --- !u!4 &66579801
 Transform:
@@ -544,8 +544,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22255e1465fd4694933d0339a30aecf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _warningUI: {fileID: 273577860}
   email: 
-  warningUI: {fileID: 273577860}
 --- !u!1 &97962832
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,8 +871,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8199a7cfabd24b3a8fc8e16fc19235a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _warningUI: {fileID: 273577860}
   password: 
-  warningUI: {fileID: 273577860}
 --- !u!1 &106264399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1291,8 +1291,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e0c0282243491997c589d44af5e04e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registrationUI: {fileID: 606647979}
-  loginUI: {fileID: 1449341940}
+  _registrationUI: {fileID: 606647979}
+  _loginUI: {fileID: 1449341940}
 --- !u!1 &273577860
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,7 +1325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 035b645414db41b7ba093b95e0c3357e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warningText: {fileID: 1638246716}
+  _warningText: {fileID: 1638246716}
 --- !u!114 &273577862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2485,9 +2485,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bee9d739c92041e5820be038532b1ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentUI: {fileID: 1157359433}
-  mainMenuUI: {fileID: 2126427905}
-  carsInGarageUI: {fileID: 445988726}
+  _currentUI: {fileID: 1157359433}
+  _mainMenuUI: {fileID: 2126427905}
+  _carsInGarageUI: {fileID: 445988726}
   carEnum: 0
 --- !u!1001 &635351244
 PrefabInstance:
@@ -3302,8 +3302,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22255e1465fd4694933d0339a30aecf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _warningUI: {fileID: 273577860}
   email: 
-  warningUI: {fileID: 273577860}
 --- !u!1 &852930091
 GameObject:
   m_ObjectHideFlags: 0
@@ -4061,7 +4061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04e5f1681b0445bea46552804d78a2d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carSelectButton: {fileID: 621505124}
+  _carSelectButton: {fileID: 621505124}
 --- !u!1 &1013958981
 GameObject:
   m_ObjectHideFlags: 0
@@ -4562,13 +4562,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d19beb29224e8fbba33491c2149080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firebaseManager: {fileID: 1354983579}
-  emailInput: {fileID: 97754644}
-  passwordInput: {fileID: 100044960}
-  confirmPasswordInput: {fileID: 1965548331}
-  warningUI: {fileID: 273577861}
-  registrationUI: {fileID: 606647979}
-  mainMenuUI: {fileID: 2126427905}
+  _firebaseManager: {fileID: 1354983579}
+  _emailInput: {fileID: 97754644}
+  _passwordInput: {fileID: 100044960}
+  _confirmPasswordInput: {fileID: 1965548331}
+  _warningUI: {fileID: 273577861}
+  _registrationUI: {fileID: 606647979}
+  _mainMenuUI: {fileID: 2126427905}
 --- !u!1 &1059927366
 GameObject:
   m_ObjectHideFlags: 0
@@ -4704,8 +4704,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd5b9b09ad544c4b18a9e70bee9d686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loginUI: {fileID: 1449341940}
-  registrationUI: {fileID: 606647979}
+  _loginUI: {fileID: 1449341940}
+  _registrationUI: {fileID: 606647979}
 --- !u!1001 &1132764244
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5543,9 +5543,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3947f46c467742ffb7759f47fa0c0d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentUI: {fileID: 2126427905}
-  garageUI: {fileID: 1157359433}
-  carsInGarageUI: {fileID: 445988726}
+  _currentUI: {fileID: 2126427905}
+  _garageUI: {fileID: 1157359433}
+  _carsInGarageUI: {fileID: 445988726}
 --- !u!1 &1354983577
 GameObject:
   m_ObjectHideFlags: 0
@@ -6147,12 +6147,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d929b76a84442f888a0f223d938e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firebaseManager: {fileID: 1354983579}
-  emailInput: {fileID: 834445391}
-  passwordInput: {fileID: 1715095518}
-  warningUI: {fileID: 273577861}
-  loginUI: {fileID: 1449341940}
-  mainMenuUI: {fileID: 2126427905}
+  _firebaseManager: {fileID: 1354983579}
+  _emailInput: {fileID: 834445391}
+  _passwordInput: {fileID: 1715095518}
+  _warningUI: {fileID: 273577861}
+  _loginUI: {fileID: 1449341940}
+  _mainMenuUI: {fileID: 2126427905}
 --- !u!1 &1615334809
 GameObject:
   m_ObjectHideFlags: 0
@@ -6931,8 +6931,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8199a7cfabd24b3a8fc8e16fc19235a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _warningUI: {fileID: 273577860}
   password: 
-  warningUI: {fileID: 273577860}
 --- !u!1 &1760706379
 GameObject:
   m_ObjectHideFlags: 0
@@ -7068,9 +7068,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8709aa22ce548ce94566996a82386c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firebaseManager: {fileID: 1354983579}
-  mainMenuUI: {fileID: 2126427905}
-  loginUI: {fileID: 1449341940}
+  _firebaseManager: {fileID: 1354983579}
+  _mainMenuUI: {fileID: 2126427905}
+  _loginUI: {fileID: 1449341940}
 --- !u!1 &1762686709
 GameObject:
   m_ObjectHideFlags: 0
@@ -7206,9 +7206,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f86c71558fa24c718789966e2395858b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fusionManager: {fileID: 66579800}
-  mainMenuUI: {fileID: 2126427905}
-  loadingUI: {fileID: 1667259431}
+  _fusionManager: {fileID: 66579800}
+  _mainMenuUI: {fileID: 2126427905}
+  _loadingUI: {fileID: 1667259431}
 --- !u!1 &1773115878
 GameObject:
   m_ObjectHideFlags: 0
@@ -8259,8 +8259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 534458ec73de458880f04bee87812b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _warningUI: {fileID: 273577860}
   confirmPassword: 
-  warningUI: {fileID: 273577860}
 --- !u!1 &2001683744
 GameObject:
   m_ObjectHideFlags: 0

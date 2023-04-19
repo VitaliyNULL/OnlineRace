@@ -13,11 +13,11 @@ namespace VitaliyNULL.MapGeneration
 
         #region Public Fields
 
-        public MapTile previousMapTile;
-        public MapTile nextMapTile;
+        [HideInInspector] public MapTile previousMapTile;
+        [HideInInspector] public MapTile nextMapTile;
 
         #endregion
-        
+
         #region Public Methods
 
         /// <summary>

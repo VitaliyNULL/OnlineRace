@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  mapTiles:
+  _mapTiles:
   - {fileID: 5755503897929707635, guid: 2932b722cfff422408133c49c2c8d8c1, type: 3}
 --- !u!114 &7159102418066561
 MonoBehaviour:

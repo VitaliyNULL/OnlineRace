@@ -19,6 +19,13 @@ namespace VitaliyNULL.FusionManager
         private const string MapGeneratorPath = "MapGenerator";
         private bool _leftMove;
         private bool _rightMove;
+        [Networked] private bool IsMapGenerated { get; set; }
+
+        #endregion
+
+        #region Public Fields
+
+        public Dictionary<PlayerRef, NetworkObject> players = new Dictionary<PlayerRef, NetworkObject>();
 
         #endregion
 
@@ -60,12 +67,35 @@ namespace VitaliyNULL.FusionManager
 
         #endregion
 
+        #region RPC
+
+        [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
+        private void RPC_UpdatePlayers(PlayerRef playerRef, NetworkObject networkObject)
+        {
+            players[playerRef] = networkObject;
+        }
+
+        #endregion
+
         #region INetworkRunnerCallbacks
 
         public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
         {
-            runner.Spawn(Resources.Load<MapGenerator>(MapGeneratorPath));
-            runner.Spawn(_carPrefab, new Vector3(-8, 4, 0), Quaternion.identity, player);
+            if (runner.IsServer)
+            {
+                if (!IsMapGenerated)
+                {
+                    IsMapGenerated = true;
+                    runner.Spawn(Resources.Load<MapGenerator>(MapGeneratorPath));
+                }
+
+                Vector3 spawnPosition =
+                    new Vector3(3 + (player.RawEncoded % runner.Config.Simulation.DefaultPlayers) * 5, -9, 0);
+
+                NetworkObject playerObject =
+                    runner.Spawn(_carPrefab, spawnPosition, Quaternion.identity, player);
+                RPC_UpdatePlayers(player, playerObject);
+            }
         }
 
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
