@@ -1,15 +1,25 @@
 using UnityEngine;
 using UnityEngine.UI;
+using VitaliyNULL.Core;
 
 namespace VitaliyNULL.MenuSceneUI.Garage
 {
     public class CarSelectButton : MonoBehaviour
     {
-        [SerializeField] private GameObject currentUI;
-        [SerializeField] private GameObject mainMenuUI;
-        [SerializeField] private GameObject carsInGarageUI;
-        private readonly string CAR_SKIN = "CAR_SKIN";
+        #region Private Fields
+
+        [SerializeField] private GameObject _currentUI;
+        [SerializeField] private GameObject _mainMenuUI;
+        [SerializeField] private GameObject _carsInGarageUI;
+        private readonly string _carSkin = "CAR_SKIN";
+
+        #endregion
+
+        #region MyRegion
+
         [HideInInspector] public CarEnum carEnum = 0;
+
+        #endregion
 
         public void SetCar(int index)
         {
@@ -18,13 +28,12 @@ namespace VitaliyNULL.MenuSceneUI.Garage
 
         private void Start()
         {
-            
             GetComponent<Button>().onClick.AddListener(() =>
             {
-                PlayerPrefs.SetInt(CAR_SKIN, (int)carEnum);
-                currentUI.SetActive(false);
-                mainMenuUI.SetActive(true);
-                carsInGarageUI.SetActive(false);
+                PlayerPrefs.SetInt(_carSkin, (int)carEnum);
+                _currentUI.SetActive(false);
+                _mainMenuUI.SetActive(true);
+                _carsInGarageUI.SetActive(false);
                 Debug.Log($"Current car with index {carEnum}");
             });
         }

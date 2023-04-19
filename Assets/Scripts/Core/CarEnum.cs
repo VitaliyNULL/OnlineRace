@@ -1,4 +1,4 @@
-namespace VitaliyNULL.MenuSceneUI.Garage
+namespace VitaliyNULL.Core
 {
     public enum CarEnum
     {

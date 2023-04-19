@@ -7,8 +7,9 @@ namespace VitaliyNULL.MapGeneration
 {
     public class MapGenerator : NetworkBehaviour
     {
-        [SerializeField] private List<MapTile> mapTiles;
+        #region Private Fields
 
+        [SerializeField] private List<MapTile> _mapTiles;
         private List<MapTile> _spawnedTiles = new List<MapTile>();
         private MapTile _prevMapTile;
         private MapTile _currentMapTile;
@@ -17,11 +18,23 @@ namespace VitaliyNULL.MapGeneration
         private readonly int _step = 60;
         private readonly int _startZ = -60;
 
+        #endregion
+
+        #region NetworkBehaviour Callbacks
+
         public override void Spawned()
         {
             GenerateMap();
         }
 
+        #endregion
+        
+        #region Private Methods
+
+        /// <summary>
+        /// Use this method when spawning MapTile
+        /// </summary>
+        /// <param name="mapTile"> Object that spawned</param>
         private void SetMapTileHierarchy(MapTile mapTile)
         {
             if (_prevMapTile != null)
@@ -40,12 +53,15 @@ namespace VitaliyNULL.MapGeneration
             _currentMapTile = mapTile;
         }
 
+        /// <summary>
+        /// This method using only in init Game session
+        /// </summary>
         private void GenerateMap()
         {
             int nextZ = _startZ;
             for (int i = 0; i < _tilecount; i++)
             {
-                MapTile mapTile = Runner.Spawn(mapTiles[0], new Vector3(0, -12, nextZ), Quaternion.identity);
+                MapTile mapTile = Runner.Spawn(_mapTiles[0], new Vector3(0, -12, nextZ), Quaternion.identity);
                 _spawnedTiles.Add(mapTile);
                 SetMapTileHierarchy(mapTile);
                 mapTile.name = String.Format($"RoadTile {i}");
@@ -72,5 +88,7 @@ namespace VitaliyNULL.MapGeneration
 
             Debug.Log("a");
         }
+
+        #endregion
     }
 }

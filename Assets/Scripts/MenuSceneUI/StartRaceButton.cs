@@ -5,18 +5,26 @@ namespace VitaliyNULL.MenuSceneUI
 {
     public class StartRaceButton : MonoBehaviour
     {
-        [SerializeField] private FusionManager.FusionManager fusionManager;
-        [SerializeField] private GameObject mainMenuUI;
-        [SerializeField] private GameObject loadingUI;
+        #region Private Fields
+
+        [SerializeField] private FusionManager.FusionManager _fusionManager;
+        [SerializeField] private GameObject _mainMenuUI;
+        [SerializeField] private GameObject _loadingUI;
+
+        #endregion
+
+        #region MonoBehaviour Callbacks
 
         private void Start()
         {
             GetComponent<Button>().onClick.AddListener(() =>
             {
-                mainMenuUI.SetActive(false);
-                loadingUI.SetActive(true);
-                fusionManager.AutoPlay();
+                _mainMenuUI.SetActive(false);
+                _loadingUI.SetActive(true);
+                _fusionManager.AutoPlay();
             });
         }
+
+        #endregion
     }
 }

@@ -5,8 +5,17 @@ namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
 {
     public class PasswordInput : MonoBehaviour
     {
-        [HideInInspector]public string password = "";
-        [SerializeField] private GameObject warningUI;
+        #region Private Fields
+
+        [SerializeField] private GameObject _warningUI;
+
+        #endregion
+
+        #region Public Fields
+
+        [HideInInspector] public string password = "";
+
+        #endregion
 
 
         private void Start()
@@ -14,7 +23,7 @@ namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
             GetComponent<TMP_InputField>().onValueChanged.AddListener(arg0 =>
             {
                 password = arg0;
-                warningUI.SetActive(false);
+                _warningUI.SetActive(false);
             });
         }
     }

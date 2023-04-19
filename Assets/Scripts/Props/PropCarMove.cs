@@ -1,4 +1,3 @@
-using System;
 using Fusion;
 using UnityEngine;
 
@@ -6,14 +5,29 @@ namespace VitaliyNULL.Props
 {
     public class PropCarMove : NetworkBehaviour
     {
+        #region Private Fields
+
         private NetworkRigidbody _rigidbody;
-        public float speed;
         private Vector3 _directionToMove;
+
+        #endregion
+
+        #region Public Fields
+
+        public float speed;
+
+        #endregion
+
+        #region MonoBehaviour Callbacks
 
         private void Awake()
         {
             _rigidbody ??= GetComponent<NetworkRigidbody>();
         }
+
+        #endregion
+
+        #region NetworkBehaviour Callbacks
 
         public override void Spawned()
         {
@@ -39,5 +53,7 @@ namespace VitaliyNULL.Props
             _rigidbody.Rigidbody.MovePosition(
                 _rigidbody.Rigidbody.position + _directionToMove * speed * Runner.DeltaTime);
         }
+
+        #endregion
     }
 }

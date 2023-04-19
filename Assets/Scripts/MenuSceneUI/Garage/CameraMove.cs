@@ -5,27 +5,37 @@ namespace VitaliyNULL.MenuSceneUI.Garage
 {
     public class CameraMove : MonoBehaviour
     {
-        private readonly string CAR_SKIN = "CAR_SKIN";
-        [SerializeField] private CarSelectButton carSelectButton;
+        #region Private Fields
+
+        private readonly string _carSkin = "CAR_SKIN";
+        [SerializeField] private CarSelectButton _carSelectButton;
         private float _moveForce = 20f;
-        private bool _isMoving = false;
+        private bool _isMoving;
         private int _carIndex;
+
+        #endregion
+
+        #region MonoBehaviour Callbacks
 
         private void Start()
         {
-            if (PlayerPrefs.HasKey(CAR_SKIN))
+            if (PlayerPrefs.HasKey(_carSkin))
             {
-                _carIndex = PlayerPrefs.GetInt(CAR_SKIN);
-                carSelectButton.SetCar(_carIndex);
-                transform.position = new Vector3(transform.position.x + _moveForce * _carIndex,transform.position.y,transform.position.z);
+                _carIndex = PlayerPrefs.GetInt(_carSkin);
+                _carSelectButton.SetCar(_carIndex);
+                transform.position = new Vector3(transform.position.x + _moveForce * _carIndex, transform.position.y,
+                    transform.position.z);
             }
             else
             {
                 _carIndex = 0;
-                carSelectButton.SetCar(0);
+                _carSelectButton.SetCar(0);
             }
-          
         }
+
+        #endregion
+
+        #region Public Methods
 
         public void MoveLeft()
         {
@@ -33,7 +43,6 @@ namespace VitaliyNULL.MenuSceneUI.Garage
             {
                 _isMoving = true;
                 StartCoroutine(StartMoveLeft());
-               
             }
         }
 
@@ -43,9 +52,12 @@ namespace VitaliyNULL.MenuSceneUI.Garage
             {
                 _isMoving = true;
                 StartCoroutine(StartMoveRight());
-                
             }
         }
+
+        #endregion
+
+        #region Coroutines
 
         private IEnumerator StartMoveLeft()
         {
@@ -59,7 +71,7 @@ namespace VitaliyNULL.MenuSceneUI.Garage
             transform.position = new Vector3(toMove, transform.position.y, transform.position.z);
             _isMoving = false;
             _carIndex--;
-            carSelectButton.SetCar(_carIndex);
+            _carSelectButton.SetCar(_carIndex);
         }
 
         private IEnumerator StartMoveRight()
@@ -74,7 +86,9 @@ namespace VitaliyNULL.MenuSceneUI.Garage
             transform.position = new Vector3(toMove, transform.position.y, transform.position.z);
             _isMoving = false;
             _carIndex++;
-            carSelectButton.SetCar(_carIndex);
+            _carSelectButton.SetCar(_carIndex);
         }
+
+        #endregion
     }
 }

@@ -5,25 +5,33 @@ namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
 {
     public class LoginButton : MonoBehaviour
     {
-        [SerializeField] private FirebaseManager.FirebaseManager firebaseManager;
-        [SerializeField] private EmailInput emailInput;
-        [SerializeField] private PasswordInput passwordInput;
-        [SerializeField] private WarningUI warningUI;
-        [SerializeField] private GameObject loginUI;
-        [SerializeField] private GameObject mainMenuUI;
+        #region Private Fields
+
+        [SerializeField] private FirebaseManager.FirebaseManager _firebaseManager;
+        [SerializeField] private EmailInput _emailInput;
+        [SerializeField] private PasswordInput _passwordInput;
+        [SerializeField] private WarningUI _warningUI;
+        [SerializeField] private GameObject _loginUI;
+        [SerializeField] private GameObject _mainMenuUI;
+
+        #endregion
+
+        #region MonoBehaviour Callbacks
 
         private void Start()
         {
             GetComponent<Button>().onClick
                 .AddListener(() =>
                 {
-                    firebaseManager.InitializeFirebase();
-                    firebaseManager.LoginButton(emailInput, passwordInput, warningUI, () =>
+                    _firebaseManager.InitializeFirebase();
+                    _firebaseManager.LoginButton(_emailInput, _passwordInput, _warningUI, () =>
                     {
-                        loginUI.SetActive(false);
-                        mainMenuUI.SetActive(true);
+                        _loginUI.SetActive(false);
+                        _mainMenuUI.SetActive(true);
                     });
                 });
         }
+
+        #endregion
     }
 }

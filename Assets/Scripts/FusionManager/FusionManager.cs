@@ -11,17 +11,27 @@ namespace VitaliyNULL.FusionManager
 {
     public class FusionManager : MonoBehaviour, INetworkRunnerCallbacks
     {
-        [SerializeField] private NetworkPrefabRef carPrefab;
+        #region Private Fields
+
+        [SerializeField] private NetworkPrefabRef _carPrefab;
         private NetworkRunner _runner;
-        private string _sceneName = "GameScene";
-        private const string MAPGENERATOR_PATH = "MapGenerator";
-        private bool _leftMove = false;
-        private bool _rightMove = false;
+        private readonly string _sceneName = "GameScene";
+        private const string MapGeneratorPath = "MapGenerator";
+        private bool _leftMove;
+        private bool _rightMove;
+
+        #endregion
+
+        #region Public Methods
 
         public void AutoPlay()
         {
             StartGame(GameMode.AutoHostOrClient);
         }
+
+        #endregion
+
+        #region MonoBehaviour Callbacks
 
         private void Update()
         {
@@ -29,13 +39,16 @@ namespace VitaliyNULL.FusionManager
             _rightMove |= Input.GetKey(KeyCode.D);
         }
 
-        async void StartGame(GameMode mode)
+        #endregion
+
+        #region Private Fields
+
+        private async void StartGame(GameMode mode)
         {
             // Create the Fusion runner and let it know that we will be providing user input
             _runner = gameObject.AddComponent<NetworkRunner>();
             _runner.ProvideInput = true;
 
-            // Start or join (depends on gamemode) a session with a specific name
             await _runner.StartGame(new StartGameArgs()
             {
                 GameMode = mode,
@@ -45,10 +58,14 @@ namespace VitaliyNULL.FusionManager
             });
         }
 
+        #endregion
+
+        #region INetworkRunnerCallbacks
+
         public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
         {
-            runner.Spawn(Resources.Load<MapGenerator>(MAPGENERATOR_PATH));
-            runner.Spawn(carPrefab, new Vector3(-8, 4, 0), Quaternion.identity, player);
+            runner.Spawn(Resources.Load<MapGenerator>(MapGeneratorPath));
+            runner.Spawn(_carPrefab, new Vector3(-8, 4, 0), Quaternion.identity, player);
         }
 
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
@@ -60,18 +77,17 @@ namespace VitaliyNULL.FusionManager
             NetworkInputData data = new NetworkInputData();
             if (_leftMove)
             {
-                data.ToMoveX |= NetworkInputData.MOVE_LEFT;
+                data.ToMoveX |= NetworkInputData.MoveLeft;
             }
 
             if (_rightMove)
             {
-                data.ToMoveX |= NetworkInputData.MOVE_RIGHT;
+                data.ToMoveX |= NetworkInputData.MoveRight;
             }
 
             _leftMove = false;
             _rightMove = false;
             input.Set(data);
-            Debug.Log("Input");
         }
 
         public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)
@@ -126,5 +142,7 @@ namespace VitaliyNULL.FusionManager
         public void OnSceneLoadStart(NetworkRunner runner)
         {
         }
+
+        #endregion
     }
 }

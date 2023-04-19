@@ -1,4 +1,5 @@
 using UnityEngine;
+using VitaliyNULL.Core;
 
 namespace VitaliyNULL.MenuSceneUI.Garage
 {

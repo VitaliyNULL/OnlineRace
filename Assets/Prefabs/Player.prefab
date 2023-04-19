@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2452724948886973642}
   - component: {fileID: 2452724948886973643}
   - component: {fileID: 2452724948886973644}
+  - component: {fileID: 3185273256937894310}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -74,6 +75,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 2452724948886973640}
   - {fileID: 2452724948886973643}
+  - {fileID: 3185273256937894310}
   SimulationBehaviours: []
 --- !u!54 &2452724948886973642
 Rigidbody:
@@ -89,7 +91,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &2452724948886973643
 MonoBehaviour:
@@ -132,6 +134,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 2, z: 7}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3185273256937894310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2452724948886973645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b9c044dfc2a4fa49a8812af20bdcad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
 --- !u!1001 &2452724948826491185
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188,8 +203,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5701007422738577002, guid: 9ea2ea91c8ce9fa41abab502c21dce33, type: 3}
+      propertyPath: m_Size.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701007422738577002, guid: 9ea2ea91c8ce9fa41abab502c21dce33, type: 3}
       propertyPath: m_Size.z
       value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701007422738577002, guid: 9ea2ea91c8ce9fa41abab502c21dce33, type: 3}
+      propertyPath: m_Center.y
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 5701007422738577002, guid: 9ea2ea91c8ce9fa41abab502c21dce33, type: 3}
       propertyPath: m_Center.z

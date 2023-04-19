@@ -3,14 +3,22 @@ using UnityEngine;
 
 namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
 {
-    public class WarningUI: MonoBehaviour
+    public class WarningUI : MonoBehaviour
     {
-        [SerializeField] private TMP_Text warningText;
+        #region Private Fields
+
+        [SerializeField] private TMP_Text _warningText;
+
+        #endregion
+
+        #region Public Methods
 
         public void ChangeWarningText(string value)
         {
-            warningText.text = value;
+            _warningText.text = value;
             gameObject.SetActive(true);
         }
+
+        #endregion
     }
 }

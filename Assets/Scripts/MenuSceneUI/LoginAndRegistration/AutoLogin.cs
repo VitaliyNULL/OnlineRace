@@ -4,30 +4,39 @@ namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
 {
     public class AutoLogin : MonoBehaviour
     {
-        [SerializeField] private FirebaseManager.FirebaseManager firebaseManager;
-        [SerializeField] private GameObject loadingUI;
-        [SerializeField] private GameObject mainMenuUI;
-        [SerializeField] private GameObject registrationUI;
+        #region Private Fields
+
+        [SerializeField] private FirebaseManager.FirebaseManager _firebaseManager;
+        [SerializeField] private GameObject _loadingUI;
+        [SerializeField] private GameObject _mainMenuUI;
+        [SerializeField] private GameObject _registrationUI;
         private readonly string _passwordKey = "PASSWORD";
         private readonly string _emailKey = "EMAIL";
+
+        #endregion
+
+
+        #region MonoBehavior Callbacks
 
         private void Start()
         {
             if (PlayerPrefs.HasKey(_emailKey))
             {
-                firebaseManager.InitializeFirebase();
-                firebaseManager.AutoLogin(PlayerPrefs.GetString(_emailKey), PlayerPrefs.GetString(_passwordKey),
+                _firebaseManager.InitializeFirebase();
+                _firebaseManager.AutoLogin(PlayerPrefs.GetString(_emailKey), PlayerPrefs.GetString(_passwordKey),
                     () =>
                     {
-                        loadingUI.SetActive(false);
-                        mainMenuUI.SetActive(true);
+                        _loadingUI.SetActive(false);
+                        _mainMenuUI.SetActive(true);
                     });
             }
             else
             {
-                loadingUI.SetActive(false);
-                registrationUI.SetActive(true);
+                _loadingUI.SetActive(false);
+                _registrationUI.SetActive(true);
             }
         }
+
+        #endregion
     }
 }

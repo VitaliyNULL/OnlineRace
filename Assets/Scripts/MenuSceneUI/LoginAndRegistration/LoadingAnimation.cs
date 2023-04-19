@@ -33,7 +33,7 @@ namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
 
         #endregion
 
-        #region Private Methods
+        #region Coroutines
 
         private IEnumerator AnimationText()
         {

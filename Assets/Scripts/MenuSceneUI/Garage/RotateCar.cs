@@ -4,13 +4,17 @@ namespace VitaliyNULL.MenuSceneUI.Garage
 {
     public class RotateCar : MonoBehaviour
     {
-        private float toRotate = 20f;
+        #region Private Fields
+
+        private readonly float _toRotate = 20f;
+
+        #endregion
 
         #region MonoBehaviour Callbacks
 
         private void Update()
         {
-            transform.Rotate(0, toRotate * Time.deltaTime,
+            transform.Rotate(0, _toRotate * Time.deltaTime,
                 0, Space.Self);
         }
 

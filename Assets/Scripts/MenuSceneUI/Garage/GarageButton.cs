@@ -3,20 +3,30 @@ using UnityEngine.UI;
 
 namespace VitaliyNULL.MenuSceneUI.Garage
 {
-    public class GarageButton: MonoBehaviour
+    public class GarageButton : MonoBehaviour
     {
-        [SerializeField] private GameObject currentUI;
-        [SerializeField] private GameObject garageUI;
-        [SerializeField] private GameObject carsInGarageUI;
+        #region Private Fields
+
+        [SerializeField] private GameObject _currentUI;
+        [SerializeField] private GameObject _garageUI;
+        [SerializeField] private GameObject _carsInGarageUI;
+
+        #endregion
+
+        #region MonoBehaviour Callbacks
 
         private void Start()
         {
             GetComponent<Button>().onClick.AddListener((() =>
             {
-                currentUI.SetActive(false);
-                garageUI.SetActive(true);
-                carsInGarageUI.SetActive(true);
+                _currentUI.SetActive(false);
+                _garageUI.SetActive(true);
+                _carsInGarageUI.SetActive(true);
             }));
         }
+
+        #endregion
+
+
     }
 }

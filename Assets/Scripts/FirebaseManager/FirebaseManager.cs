@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Linq;
 using Firebase;
@@ -104,8 +103,7 @@ namespace VitaliyNULL.FirebaseManager
         }
 
         #endregion
-
-
+        
         #region Coroutines
 
         private IEnumerator WaitForAutoLogin(string email, string password, UnityAction openMainMenu)
@@ -367,20 +365,6 @@ namespace VitaliyNULL.FirebaseManager
         }
 
         #endregion
-
-
-        //TODO: Make updating for rating
-        // private IEnumerator UpdateBestScore(int bestScore)
-        // {
-        //     var databaseTask = _dataBaseReference.Child("users").Child(_user.UserId).Child("bestScore")
-        //         .SetValueAsync(bestScore);
-        //     yield return new WaitUntil(predicate: () => databaseTask.IsCompleted);
-        //     if (databaseTask.Exception != null)
-        //     {
-        //         Debug.LogWarning($"Failed to register task with {databaseTask.Exception}");
-        //     }
-        //
-        //     _isSavingData = false;
-        // }
+        
     }
 }

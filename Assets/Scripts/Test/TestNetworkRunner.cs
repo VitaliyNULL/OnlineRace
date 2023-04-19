@@ -10,11 +10,18 @@ namespace VitaliyNULL.Test
 {
     public class TestNetworkRunner : MonoBehaviour, INetworkRunnerCallbacks
     {
-        [SerializeField] private NetworkPrefabRef carPrefab;
+        #region Private Fields
+
+        [SerializeField] private NetworkPrefabRef _carPrefab;
 
         private NetworkRunner _networkRunner;
         private bool _leftMove = false;
         private bool _rightMove = false;
+
+        #endregion
+
+
+        #region MonoBehaviour Callbacks
 
         private void Update()
         {
@@ -35,9 +42,13 @@ namespace VitaliyNULL.Test
             });
         }
 
+        #endregion
+
+        #region INetworkRunnerCallbacks
+
         public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
         {
-            runner.Spawn(carPrefab, new Vector3(-8, 4, 0), Quaternion.identity, player);
+            runner.Spawn(_carPrefab, new Vector3(-8, 4, 0), Quaternion.identity, player);
         }
 
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
@@ -49,12 +60,12 @@ namespace VitaliyNULL.Test
             NetworkInputData data = new NetworkInputData();
             if (_leftMove)
             {
-                data.ToMoveX |= NetworkInputData.MOVE_LEFT;
+                data.ToMoveX |= NetworkInputData.MoveLeft;
             }
 
             if (_rightMove)
             {
-                data.ToMoveX |= NetworkInputData.MOVE_RIGHT;
+                data.ToMoveX |= NetworkInputData.MoveRight;
             }
 
             _leftMove = false;
@@ -114,5 +125,7 @@ namespace VitaliyNULL.Test
         public void OnSceneLoadStart(NetworkRunner runner)
         {
         }
+
+        #endregion
     }
 }

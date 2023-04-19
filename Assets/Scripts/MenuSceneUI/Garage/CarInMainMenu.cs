@@ -5,10 +5,16 @@ namespace VitaliyNULL.MenuSceneUI.Garage
 {
     public class CarInMainMenu: MonoBehaviour
     {
+        #region Private Fields
+
         [SerializeField] private List<Car> _cars;
         private Car[] _carsForUse;
-        private readonly string CAR_SKIN = "CAR_SKIN";
-        private bool _isInitialized = false;
+        private readonly string _carSkin = "CAR_SKIN";
+        private bool _isInitialized ;
+
+        #endregion
+
+        #region MonoBehaviour Callbacks
 
         private void Start()
         {
@@ -18,16 +24,17 @@ namespace VitaliyNULL.MenuSceneUI.Garage
                 _carsForUse[(int)car.carEnum] = car;
                 car.gameObject.SetActive(false);
             }
+
             _isInitialized = true;
-            if (PlayerPrefs.HasKey(CAR_SKIN))
+            if (PlayerPrefs.HasKey(_carSkin))
             {
-                _carsForUse[PlayerPrefs.GetInt(CAR_SKIN)].gameObject.SetActive(true);
-                Debug.Log($"Current car with index {PlayerPrefs.GetInt(CAR_SKIN)}");
+                _carsForUse[PlayerPrefs.GetInt(_carSkin)].gameObject.SetActive(true);
+                Debug.Log($"Current car with index {PlayerPrefs.GetInt(_carSkin)}");
             }
             else
             {
-                PlayerPrefs.SetInt(CAR_SKIN,0);
-                _carsForUse[PlayerPrefs.GetInt(CAR_SKIN)].gameObject.SetActive(true);
+                PlayerPrefs.SetInt(_carSkin, 0);
+                _carsForUse[PlayerPrefs.GetInt(_carSkin)].gameObject.SetActive(true);
             }
         }
 
@@ -40,7 +47,7 @@ namespace VitaliyNULL.MenuSceneUI.Garage
                     car.gameObject.SetActive(false);
                 }
 
-                _carsForUse[PlayerPrefs.GetInt(CAR_SKIN)].gameObject.SetActive(true);
+                _carsForUse[PlayerPrefs.GetInt(_carSkin)].gameObject.SetActive(true);
             }
         }
 
@@ -48,9 +55,11 @@ namespace VitaliyNULL.MenuSceneUI.Garage
         {
             foreach (var car in _carsForUse)
             {
-                if(car==null) return;
+                if (car == null) return;
                 car.gameObject.SetActive(false);
             }
         }
+
+        #endregion
     }
 }

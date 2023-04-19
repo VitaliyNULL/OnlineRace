@@ -9,16 +9,29 @@ namespace VitaliyNULL.Player
 {
     public class PlayerMove : NetworkBehaviour
     {
+        #region Private Fields
+
         private readonly float[] _toMoveXPositions = { -8, -3, 3, 8 };
         private int _currentPositionIndex;
         private bool _isMoving = false;
         private float _sideMoveSpeed = 10f;
+        private float _forwardSpeed = 40f;
+        private float _multiplayer = 1f;
         private NetworkRigidbody _rigidbody;
+        private Vector3 _toMove;
+
+        #endregion
+
+        #region MonoBehaviour Callbacks
 
         private void Awake()
         {
             _rigidbody ??= GetComponent<NetworkRigidbody>();
         }
+
+        #endregion
+
+        #region NetworkBehaviour Callbacks
 
         public override void Spawned()
         {
@@ -27,13 +40,14 @@ namespace VitaliyNULL.Player
             CinemachineVirtualCamera Camera = FindObjectOfType<CinemachineVirtualCamera>();
             Camera.Follow = transform;
             Camera.LookAt = transform;
+            _toMove = _rigidbody.Rigidbody.position;
         }
 
         public override void FixedUpdateNetwork()
         {
             if (GetInput(out NetworkInputData data))
             {
-                if ((data.ToMoveX & NetworkInputData.MOVE_LEFT) != 0 && !_isMoving)
+                if ((data.ToMoveX & NetworkInputData.MoveLeft) != 0 && !_isMoving)
                 {
                     if (_currentPositionIndex != 0)
                     {
@@ -43,7 +57,7 @@ namespace VitaliyNULL.Player
                         StartCoroutine(StartMovingLeft(_toMoveXPositions[_currentPositionIndex]));
                     }
                 }
-                else if ((data.ToMoveX & NetworkInputData.MOVE_RIGHT) != 0 && !_isMoving)
+                else if ((data.ToMoveX & NetworkInputData.MoveRight) != 0 && !_isMoving)
                 {
                     if (_currentPositionIndex != _toMoveXPositions.Length - 1)
                     {
@@ -54,7 +68,18 @@ namespace VitaliyNULL.Player
                     }
                 }
             }
+
+            if (_multiplayer < 3)
+            {
+                _multiplayer += 0.001f;
+            }
+
+            _toMove += Vector3.forward * _forwardSpeed * _multiplayer * Runner.DeltaTime;
         }
+
+        #endregion
+
+        #region Coroutines
 
         private IEnumerator StartMovingLeft(float toMoveX)
         {
@@ -73,7 +98,6 @@ namespace VitaliyNULL.Player
             _isMoving = false;
         }
 
-
         private IEnumerator StartMovingRight(float toMoveX)
         {
             float xPositionToMove = _rigidbody.Rigidbody.position.x;
@@ -90,5 +114,7 @@ namespace VitaliyNULL.Player
                 new Vector3(toMoveX, _rigidbody.Rigidbody.position.y, _rigidbody.Rigidbody.position.z);
             _isMoving = false;
         }
+
+        #endregion
     }
 }

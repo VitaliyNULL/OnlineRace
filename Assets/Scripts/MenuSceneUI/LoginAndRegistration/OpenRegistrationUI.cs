@@ -5,16 +5,24 @@ namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
 {
     public class OpenRegistrationUI : MonoBehaviour
     {
-        [SerializeField] private GameObject loginUI;
-        [SerializeField] private GameObject registrationUI;
+        #region Private Fields
+
+        [SerializeField] private GameObject _loginUI;
+        [SerializeField] private GameObject _registrationUI;
+
+        #endregion
+
+        #region MonoBehaviour Callbacks
 
         private void Start()
         {
             GetComponent<Button>().onClick.AddListener(() =>
             {
-                loginUI.SetActive(false);
-                registrationUI.SetActive(true);
+                _loginUI.SetActive(false);
+                _registrationUI.SetActive(true);
             });
         }
+
+        #endregion
     }
 }
