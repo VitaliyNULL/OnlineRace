@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1254789821547137528}
-  - component: {fileID: 7257859069557093475}
   - component: {fileID: 6872732388041705845}
   - component: {fileID: -6303821820834681498}
-  m_Layer: 0
+  - component: {fileID: -2323418576540947146}
+  - component: {fileID: -1813184574327645031}
+  m_Layer: 8
   m_Name: CrashedCar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,21 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!111 &7257859069557093475
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2824514981423299563}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &6872732388041705845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,7 +72,55 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 6872732388041705845}
+  - {fileID: -2323418576540947146}
   SimulationBehaviours: []
+--- !u!114 &-2323418576540947146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2824514981423299563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  InterpolationSpace: 0
+  InterpolationTarget: {fileID: 0}
+  InterpolateErrorCorrection: 1
+  InterpolatedErrorCorrectionSettings:
+    MinRate: 3.3
+    MaxRate: 10
+    PosBlendStart: 0.25
+    PosBlendEnd: 1
+    PosMinCorrection: 0.025
+    PosTeleportDistance: 2
+    RotBlendStart: 0.1
+    RotBlendEnd: 0.5
+    RotTeleportRadians: 1.5
+  UseLegacySharedModeInterpolation: 0
+  TargetInterpolationDelay: 0.03
+--- !u!205 &-1813184574327645031
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2824514981423299563}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 1, z: 0}
+  m_Size: 15
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.19732419
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 343895519302362787}
+  m_Enabled: 1
 --- !u!1 &4364068041421037444
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +133,7 @@ GameObject:
   - component: {fileID: 8911761772211243770}
   - component: {fileID: 343895519302362787}
   - component: {fileID: 3936781463624010528}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CarBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}

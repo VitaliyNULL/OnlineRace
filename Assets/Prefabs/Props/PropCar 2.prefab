@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: -8028282328845251213}
   - component: {fileID: -1194957039569920603}
   - component: {fileID: 8006416183018809386}
-  m_Layer: 0
+  - component: {fileID: 2554291448446337462}
+  m_Layer: 8
   m_Name: PropCar 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134,6 +135,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
   speed: 40
+--- !u!205 &2554291448446337462
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8576748363199181190}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 1.2, z: 0}
+  m_Size: 15
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.6
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 3985868864578015935}
+    - renderer: {fileID: 3985868864578015931}
+    - renderer: {fileID: 3985868864578015927}
+    - renderer: {fileID: 3985868864578015933}
+    - renderer: {fileID: 3985868864578015929}
+  - screenRelativeHeight: 0.2
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 3985868864578015935}
+  m_Enabled: 1
 --- !u!1001 &3985868864575851231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -144,6 +172,30 @@ PrefabInstance:
     - target: {fileID: 100000, guid: a6c1dd22aab11f943a7de21a160938a7, type: 3}
       propertyPath: m_Name
       value: Car8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: a6c1dd22aab11f943a7de21a160938a7, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: a6c1dd22aab11f943a7de21a160938a7, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: a6c1dd22aab11f943a7de21a160938a7, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: a6c1dd22aab11f943a7de21a160938a7, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: a6c1dd22aab11f943a7de21a160938a7, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: a6c1dd22aab11f943a7de21a160938a7, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a6c1dd22aab11f943a7de21a160938a7, type: 3}
       propertyPath: m_RootOrder
@@ -214,3 +266,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 2, z: 7.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &3985868864578015927 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300008, guid: a6c1dd22aab11f943a7de21a160938a7, type: 3}
+  m_PrefabInstance: {fileID: 3985868864575851231}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3985868864578015929 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300006, guid: a6c1dd22aab11f943a7de21a160938a7, type: 3}
+  m_PrefabInstance: {fileID: 3985868864575851231}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3985868864578015931 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300004, guid: a6c1dd22aab11f943a7de21a160938a7, type: 3}
+  m_PrefabInstance: {fileID: 3985868864575851231}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3985868864578015933 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300002, guid: a6c1dd22aab11f943a7de21a160938a7, type: 3}
+  m_PrefabInstance: {fileID: 3985868864575851231}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3985868864578015935 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300000, guid: a6c1dd22aab11f943a7de21a160938a7, type: 3}
+  m_PrefabInstance: {fileID: 3985868864575851231}
+  m_PrefabAsset: {fileID: 0}

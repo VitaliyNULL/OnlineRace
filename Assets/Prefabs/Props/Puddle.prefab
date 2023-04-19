@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1577588689514303476}
   - component: {fileID: 1577588689514303465}
   - component: {fileID: 1577588689514303478}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1577588689783046745}
   - component: {fileID: 1577588689783046746}
   - component: {fileID: 1577588689783046747}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,9 @@ GameObject:
   - component: {fileID: 1669501249426006490}
   - component: {fileID: 933174304702208263}
   - component: {fileID: 4434131679865429037}
-  m_Layer: 0
+  - component: {fileID: 6356081034018708579}
+  - component: {fileID: -5063952962077851508}
+  m_Layer: 8
   m_Name: Puddle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +258,61 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 933174304702208263}
+  - {fileID: 6356081034018708579}
   SimulationBehaviours: []
+--- !u!114 &6356081034018708579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577588689878559189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  InterpolationSpace: 0
+  InterpolationTarget: {fileID: 0}
+  InterpolateErrorCorrection: 1
+  InterpolatedErrorCorrectionSettings:
+    MinRate: 3.3
+    MaxRate: 10
+    PosBlendStart: 0.25
+    PosBlendEnd: 1
+    PosMinCorrection: 0.025
+    PosTeleportDistance: 2
+    RotBlendStart: 0.1
+    RotBlendEnd: 0.5
+    RotTeleportRadians: 1.5
+  UseLegacySharedModeInterpolation: 0
+  TargetInterpolationDelay: 0.03
+--- !u!205 &-5063952962077851508
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577588689878559189}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.12999988, y: 0.1, z: -0.09000003}
+  m_Size: 15
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.2
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 1577588689783046747}
+    - renderer: {fileID: 1577588691558019128}
+    - renderer: {fileID: 1577588689514303478}
+    - renderer: {fileID: 1577588691142345772}
+    - renderer: {fileID: 1577588690349011323}
+    - renderer: {fileID: 1577588690186680802}
+    - renderer: {fileID: 1577588690915451644}
+  m_Enabled: 1
 --- !u!1 &1577588690186680801
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +324,7 @@ GameObject:
   - component: {fileID: 1577588690186680800}
   - component: {fileID: 1577588690186680805}
   - component: {fileID: 1577588690186680802}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +407,7 @@ GameObject:
   - component: {fileID: 1577588690349011321}
   - component: {fileID: 1577588690349011322}
   - component: {fileID: 1577588690349011323}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -434,7 +490,7 @@ GameObject:
   - component: {fileID: 1577588690915451642}
   - component: {fileID: 1577588690915451647}
   - component: {fileID: 1577588690915451644}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -517,7 +573,7 @@ GameObject:
   - component: {fileID: 1577588691142345770}
   - component: {fileID: 1577588691142345775}
   - component: {fileID: 1577588691142345772}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -600,7 +656,7 @@ GameObject:
   - component: {fileID: 1577588691558019142}
   - component: {fileID: 1577588691558019131}
   - component: {fileID: 1577588691558019128}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

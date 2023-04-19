@@ -40,10 +40,16 @@ namespace VitaliyNULL.MapGeneration
                 Prop prop = spawnPoint.SpawnProp(_props[Random.Range(0, _props.Count)]);
                 // Prop prop = Runner.Spawn(props[Random.Range(0, props.Count)],
                 //     spawnPoint.transform.position, spawnPoint.gameObject.transform.rotation);
-                prop.Object.transform.SetParent(transform);
+                RPC_SetParent(prop);
             }
         }
 
         #endregion
+
+        [Rpc]
+        private void RPC_SetParent(Prop prop)
+        {
+            prop?.Object.transform.SetParent(transform);
+        }
     }
 }

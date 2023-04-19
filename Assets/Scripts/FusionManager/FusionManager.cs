@@ -17,6 +17,7 @@ namespace VitaliyNULL.FusionManager
         private NetworkRunner _runner;
         private readonly string _sceneName = "GameScene";
         private const string MapGeneratorPath = "MapGenerator";
+        private const string GameManagerPath = "GameManager";
         private bool _leftMove;
         private bool _rightMove;
         [Networked] private bool IsMapGenerated { get; set; }
@@ -60,6 +61,7 @@ namespace VitaliyNULL.FusionManager
             {
                 GameMode = mode,
                 SessionName = "TestRoom",
+                PlayerCount = 2,
                 Scene = SceneUtility.GetBuildIndexByScenePath($"Scenes/{_sceneName}"),
                 SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
             });
@@ -85,16 +87,18 @@ namespace VitaliyNULL.FusionManager
             {
                 if (!IsMapGenerated)
                 {
+                    Debug.Log("Map is Generated");
                     IsMapGenerated = true;
-                    runner.Spawn(Resources.Load<MapGenerator>(MapGeneratorPath));
+                    runner.Spawn(Resources.Load<GameManager>(GameManagerPath), null, null, player);
+                    runner.Spawn(Resources.Load<MapGenerator>(MapGeneratorPath), null, null, player);
                 }
+                //
+                // Vector3 spawnPosition =
+                //     new Vector3(3 + (player.RawEncoded % runner.Config.Simulation.DefaultPlayers) * 5, -9, 0);
 
-                Vector3 spawnPosition =
-                    new Vector3(3 + (player.RawEncoded % runner.Config.Simulation.DefaultPlayers) * 5, -9, 0);
-
-                NetworkObject playerObject =
-                    runner.Spawn(_carPrefab, spawnPosition, Quaternion.identity, player);
-                RPC_UpdatePlayers(player, playerObject);
+                // NetworkObject playerObject =
+                //     runner.Spawn(_carPrefab, spawnPosition, Quaternion.identity, player);
+                // RPC_UpdatePlayers(player, playerObject);
             }
         }
 

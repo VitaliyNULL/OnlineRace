@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using Cinemachine;
 using Fusion;
 using UnityEngine;
 using VitaliyNULL.Core;
@@ -37,9 +35,6 @@ namespace VitaliyNULL.Player
         {
             _rigidbody ??= GetComponent<NetworkRigidbody>();
             _currentPositionIndex = 0;
-            CinemachineVirtualCamera Camera = FindObjectOfType<CinemachineVirtualCamera>();
-            Camera.Follow = transform;
-            Camera.LookAt = transform;
             _toMove = _rigidbody.Rigidbody.position;
         }
 

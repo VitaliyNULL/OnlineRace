@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4614102540131587158
+--- !u!1 &5504850840963817352
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4614102540131587160}
-  - component: {fileID: 4614102540131587161}
-  - component: {fileID: 7159102418066561}
+  - component: {fileID: 220258338188445124}
+  - component: {fileID: 4856052290254622807}
+  - component: {fileID: 9155336380407186780}
   m_Layer: 0
-  m_Name: MapGenerator
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4614102540131587160
+--- !u!4 &220258338188445124
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4614102540131587158}
+  m_GameObject: {fileID: 5504850840963817352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -33,28 +33,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4614102540131587161
+--- !u!114 &4856052290254622807
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4614102540131587158}
+  m_GameObject: {fileID: 5504850840963817352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b54fe2183ea4064b6b6da1a20c34b01, type: 3}
+  m_Script: {fileID: 11500000, guid: 0154a572e1e64f3bad8055d0a8060fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  _mapTiles:
-  - {fileID: 5755503897929707635, guid: 2932b722cfff422408133c49c2c8d8c1, type: 3}
---- !u!114 &7159102418066561
+  _prefabRef:
+    RawGuidValue: 770232b501091b543b472d3430f48f86
+--- !u!114 &9155336380407186780
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4614102540131587158}
+  m_GameObject: {fileID: 5504850840963817352}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
@@ -67,8 +67,8 @@ MonoBehaviour:
   AoiPositionSource: {fileID: 0}
   Flags: 2305
   NetworkGuid:
-    RawGuidValue: 0dce8e53f9280ef44992d716089715c3
+    RawGuidValue: b2daa5f58b3119442a9b72880f68ee10
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 4614102540131587161}
+  - {fileID: 4856052290254622807}
   SimulationBehaviours: []
