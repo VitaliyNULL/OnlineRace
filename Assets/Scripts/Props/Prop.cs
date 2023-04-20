@@ -2,8 +2,8 @@ using Fusion;
 
 namespace VitaliyNULL.Props
 {
-    public class Prop : NetworkBehaviour
+    public abstract class Prop : NetworkBehaviour
     {
-        
+        public abstract void Interact();
     }
 }

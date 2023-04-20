@@ -20,7 +20,7 @@ namespace VitaliyNULL.FusionManager
         private const string GameManagerPath = "GameManager";
         private bool _leftMove;
         private bool _rightMove;
-        private bool _forwardMove;
+        private bool _backwardMove;
         [Networked] private bool IsMapGenerated { get; set; }
 
         #endregion
@@ -44,9 +44,9 @@ namespace VitaliyNULL.FusionManager
 
         private void Update()
         {
-            _leftMove |= Input.GetKey(KeyCode.A);
-            _rightMove |= Input.GetKey(KeyCode.D);
-            _forwardMove |= Input.GetKey(KeyCode.W);
+            _leftMove |= Input.GetKeyDown(KeyCode.A);
+            _rightMove |= Input.GetKeyDown(KeyCode.D);
+            _backwardMove |= Input.GetKeyDown(KeyCode.S);
         }
 
         #endregion
@@ -121,13 +121,13 @@ namespace VitaliyNULL.FusionManager
                 data.ToMoveX |= NetworkInputData.MoveRight;
             }
 
-            if (_forwardMove)
+            if (_backwardMove)
             {
-                data.ToMoveZ |= NetworkInputData.MoveForward;
+                data.ToMoveZ |= NetworkInputData.MoveBackward;
             }
 
             _leftMove = false;
-            _forwardMove = false;
+            _backwardMove = false;
             _rightMove = false;
             input.Set(data);
         }

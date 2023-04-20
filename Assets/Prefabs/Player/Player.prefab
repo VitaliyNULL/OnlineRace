@@ -119,9 +119,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  _mapTile:
+  _mapTileLayer:
     serializedVersion: 2
     m_Bits: 64
+  _propLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &3057501913508176050
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ namespace VitaliyNULL.Core
 
         public const byte MoveLeft = 0x01;
         public const byte MoveRight = 0x02;
-        public const byte MoveForward = 0x03;
+        public const byte MoveBackward = 0x03;
         public byte ToMoveX;
         public byte ToMoveZ;
 
