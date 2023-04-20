@@ -15,7 +15,7 @@ namespace VitaliyNULL.MapGeneration
         /// <returns>Object that spawned</returns>
         public Prop SpawnProp(Prop prop)
         {
-            return Runner.Spawn(prop, transform.position, Quaternion.identity);
+            return Runner.Spawn(prop, transform.position, transform.rotation);
         }
 
         #endregion

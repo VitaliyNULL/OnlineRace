@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3754649064682582341}
   - component: {fileID: 3944886080494330608}
   - component: {fileID: -6345121467953526149}
+  - component: {fileID: 4958357337291097832}
   m_Layer: 8
   m_Name: Finish flag
   m_TagString: Untagged
@@ -137,13 +138,37 @@ LODGroup:
   m_GameObject: {fileID: 5786231827547346392}
   serializedVersion: 2
   m_LocalReferencePoint: {x: 0, y: 1, z: 0}
-  m_Size: 15
+  m_Size: 30
   m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.19732419
+  - screenRelativeHeight: 0.15
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 343895519302362787, guid: b200cddbfaf002441af7a30424d68508, type: 3}
   m_Enabled: 1
+--- !u!114 &4958357337291097832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5786231827547346392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectInterest: 1
+  DefaultInterestGroups: []
+  DestroyWhenStateAuthorityLeaves: 0
+  AllowStateAuthorityOverride: 1
+  AoiPositionSource: {fileID: 0}
+  Flags: 2305
+  NetworkGuid:
+    RawGuidValue: 2e1e65078fb46104b990555c32488a27
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 3944886080494330608}
+  SimulationBehaviours: []

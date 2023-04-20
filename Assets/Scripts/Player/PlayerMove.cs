@@ -42,6 +42,29 @@ namespace VitaliyNULL.Player
         {
             if (GetInput(out NetworkInputData data))
             {
+                if ((data.ToMoveZ & NetworkInputData.MoveForward) != 0)
+                {
+                    _rigidbody.Rigidbody.MovePosition(new Vector3(_rigidbody.Rigidbody.position.x,
+                        _rigidbody.Rigidbody.position.y,
+                        _rigidbody.Rigidbody.position.z + _forwardSpeed * Runner.DeltaTime));
+                    _forwardSpeed += 0.01f;
+
+                    Debug.Log(_forwardSpeed);
+                }
+                else
+                {
+                    if (_forwardSpeed > 40f)
+                    {
+                        _forwardSpeed -= 0.01f;
+                    }
+                    else
+                    {
+                        _forwardSpeed = 40f;
+                    }
+
+                    Debug.Log(_forwardSpeed);
+                }
+
                 if ((data.ToMoveX & NetworkInputData.MoveLeft) != 0 && !_isMoving)
                 {
                     if (_currentPositionIndex != 0)

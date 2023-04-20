@@ -7,14 +7,15 @@ namespace VitaliyNULL.Props
     {
         #region Private Fields
 
-        private NetworkRigidbody _rigidbody;
+        // private NetworkRigidbody _rigidbody;
         private Vector3 _directionToMove;
+        private NetworkTransform _networkTransform;
 
         #endregion
 
         #region Public Fields
 
-        public float speed;
+        private float _speed = 20;
 
         #endregion
 
@@ -22,7 +23,8 @@ namespace VitaliyNULL.Props
 
         private void Awake()
         {
-            _rigidbody ??= GetComponent<NetworkRigidbody>();
+            // _rigidbody ??= GetComponent<NetworkRigidbody>();
+            _networkTransform ??= GetComponent<NetworkTransform>();
         }
 
         #endregion
@@ -31,8 +33,18 @@ namespace VitaliyNULL.Props
 
         public override void Spawned()
         {
-            _rigidbody ??= GetComponent<NetworkRigidbody>();
-            if (_rigidbody.Rigidbody.rotation.y > 0 || _rigidbody.Rigidbody.rotation.y < 0)
+            // _rigidbody ??= GetComponent<NetworkRigidbody>();
+            _networkTransform ??= GetComponent<NetworkTransform>();
+
+            // if (_rigidbody.Rigidbody.rotation.y > 0 || _rigidbody.Rigidbody.rotation.y < 0)
+            // {
+            //     _directionToMove = -Vector3.forward;
+            // }
+            // else
+            // {
+            //     _directionToMove = Vector3.forward;
+            // }
+            if (_networkTransform.transform.rotation.y > 0 || _networkTransform.transform.rotation.y < 0)
             {
                 _directionToMove = -Vector3.forward;
             }
@@ -44,14 +56,22 @@ namespace VitaliyNULL.Props
 
         public override void FixedUpdateNetwork()
         {
-            if (_rigidbody.Rigidbody.position.z > 6000 || _rigidbody.Rigidbody.position.z < 0)
+            // if (_rigidbody.Rigidbody.position.z > 6000 || _rigidbody.Rigidbody.position.z < 0)
+            // {
+            //     Runner.Despawn(Object);
+            //     return;
+            // }
+            //
+            // _rigidbody.Rigidbody.MovePosition(
+            //     _rigidbody.Rigidbody.position + _directionToMove * _speed * Runner.DeltaTime);
+            if (_networkTransform.transform.position.z > 6000 || _networkTransform.transform.position.z < 0)
             {
                 Runner.Despawn(Object);
                 return;
             }
 
-            _rigidbody.Rigidbody.MovePosition(
-                _rigidbody.Rigidbody.position + _directionToMove * speed * Runner.DeltaTime);
+            _networkTransform.TeleportToPosition(_networkTransform.transform.position +
+                                                 _directionToMove * _speed * Runner.DeltaTime);
         }
 
         #endregion

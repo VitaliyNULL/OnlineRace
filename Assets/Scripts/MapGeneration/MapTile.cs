@@ -20,6 +20,22 @@ namespace VitaliyNULL.MapGeneration
 
         #region Public Methods
 
+        public void StartChainToActiveTile(MapTile mapTile, int index)
+        {
+            if (mapTile.nextMapTile != null && index < 5)
+            {
+                if (mapTile.nextMapTile.isActiveAndEnabled)
+                {
+                    index++;
+                    mapTile.StartChainToActiveTile(mapTile.nextMapTile, index);
+                }
+                else
+                {
+                    mapTile.RPC_SetActiveNextTile();
+                }
+            }
+        }
+
         /// <summary>
         /// Use this method when trigger enter tile for spawning next tile 
         /// </summary>
@@ -65,7 +81,13 @@ namespace VitaliyNULL.MapGeneration
         #endregion
 
         #region RPC
-        
+
+        [Rpc]
+        private void RPC_SetActiveNextTile()
+        {
+            SetActiveNextTile();
+        }
+
         #endregion
     }
 }

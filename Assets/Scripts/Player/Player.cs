@@ -11,12 +11,12 @@ namespace VitaliyNULL.Player
     {
         #region Private Fields
 
-        private List<MapTile> _tilesToDespawn = new List<MapTile>();
+        [SerializeField] private LayerMask _mapTile;
         private GameManager _gameManager;
 
         #endregion
 
-        #region MonoBehaviour Callbacks
+        #region NetworkBehaviour Callbacks
 
         public override void Spawned()
         {
@@ -28,24 +28,14 @@ namespace VitaliyNULL.Player
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        public override void FixedUpdateNetwork()
         {
-            if (other.gameObject.CompareTag("MapTile"))
+            if (!HasStateAuthority) return;
+            RaycastHit raycastHit;
+            if (Physics.Raycast(transform.position, Vector3.down, out raycastHit, 3, _mapTile))
             {
-                Debug.Log("Triggered Enter");
-                MapTile mapTile = other.GetComponent<MapTile>();
-                RPC_SetActiveNextTile(mapTile);
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.gameObject.CompareTag("MapTile"))
-            {
-                Debug.Log("Triggered Exit");
-                MapTile mapTile = other.GetComponent<MapTile>();
-                _tilesToDespawn.Add(mapTile);
-                // RPC_DisablePrevTile(mapTile);
+                MapTile mapTile = raycastHit.collider.GetComponent<MapTile>();
+                mapTile.StartChainToActiveTile(mapTile, 0);
             }
         }
 
@@ -55,28 +45,7 @@ namespace VitaliyNULL.Player
 
         public void InitGameManager(GameManager gameManager)
         {
-            
-        }
-
-        #endregion
-        #region RPC
-
-        [Rpc]
-        private void RPC_SetActiveNextTile(MapTile mapTile)
-        {
-            mapTile.SetActiveNextTile();
-        }
-
-        [Rpc]
-        private void RPC_DisablePrevTile(MapTile mapTile)
-        {
-            mapTile.DisablePrevTile();
-        }
-
-        [Rpc]
-        private void RPC_UpdateTilesToDespawn(MapTile mapTile)
-        {
-            
+            _gameManager = gameManager;
         }
 
         #endregion
