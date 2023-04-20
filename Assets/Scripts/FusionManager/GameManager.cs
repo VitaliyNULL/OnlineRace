@@ -13,6 +13,8 @@ namespace VitaliyNULL.FusionManager
 
         #endregion
 
+        #region NetworkBehaviour Callbacks
+
         public override void Spawned()
         {
             Debug.Log(Runner.SessionInfo.PlayerCount + "/" + Runner.SessionInfo.MaxPlayers + "Players now");
@@ -21,6 +23,10 @@ namespace VitaliyNULL.FusionManager
                 RPC_SpawnAllPlayer();
             }
         }
+
+        #endregion
+
+        #region RPC
 
         [Rpc]
         private void RPC_SpawnAllPlayer()
@@ -31,7 +37,7 @@ namespace VitaliyNULL.FusionManager
                 foreach (var player in players)
                 {
                     Vector3 spawnPosition =
-                        new Vector3(3 + (player.RawEncoded % Runner.Config.Simulation.DefaultPlayers) * 5, -7, 0);
+                        new Vector3(3 + (player.RawEncoded % Runner.Config.Simulation.DefaultPlayers) * 5, -10.5f, 0);
                     NetworkObject networkObject = Runner.Spawn(_prefabRef, spawnPosition, Quaternion.identity, player);
                     RPC_UpdatePlayerLis(networkObject.GetComponent<Player.Player>());
                 }
@@ -48,5 +54,7 @@ namespace VitaliyNULL.FusionManager
                 player.InitGameManager(this);
             }
         }
+
+        #endregion
     }
 }

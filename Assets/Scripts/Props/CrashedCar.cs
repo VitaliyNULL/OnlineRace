@@ -1,6 +1,6 @@
 namespace VitaliyNULL.Props
 {
-    public class CarProp: Prop
+    public class CrashedCar : Prop
     {
         public override void Interact(Player.Player player)
         {

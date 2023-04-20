@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using Cinemachine;
 using Fusion;
@@ -17,6 +15,7 @@ namespace VitaliyNULL.Player
         [SerializeField] private LayerMask _mapTileLayer;
         [SerializeField] private LayerMask _propLayer;
         private GameManager _gameManager;
+        [SerializeField] public PlayerMove playerMove;
 
         #endregion
 
@@ -34,6 +33,8 @@ namespace VitaliyNULL.Player
 
         public override void FixedUpdateNetwork()
         {
+            
+
             if (!HasStateAuthority) return;
             RaycastHit raycastHit;
             if (Physics.Raycast(transform.position, Vector3.down, out raycastHit, 3, _mapTileLayer))
@@ -41,11 +42,14 @@ namespace VitaliyNULL.Player
                 MapTile mapTile = raycastHit.collider.GetComponent<MapTile>();
                 mapTile.StartChainToActiveTile(mapTile, 0);
             }
-
-            var colliders = Physics.OverlapBox(transform.position, new Vector3(3, 2, 7), Quaternion.identity,_propLayer);
+            var colliders =
+                Physics.OverlapBox(transform.position, new Vector3(3, 2, 7), Quaternion.identity, _propLayer);
             if (colliders != null)
             {
                 var prop = colliders.SingleOrDefault().GetComponent<Prop>();
+                // RPC_InteractWithProp(prop, this);
+                prop.Interact(this);
+                Debug.Log("Interact");
                 
             }
         }
@@ -58,6 +62,20 @@ namespace VitaliyNULL.Player
         {
             _gameManager = gameManager;
         }
+
+        #endregion
+
+        #region RPC
+
+        // [Rpc]
+        // private void RPC_InteractWithProp(Prop prop, Player player)
+        // {
+        //     if (HasStateAuthority)
+        //     {
+        //         prop.Interact(player);
+        //         Debug.Log("Interacted");
+        //     }
+        // }
 
         #endregion
     }

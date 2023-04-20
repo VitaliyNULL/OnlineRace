@@ -44,9 +44,9 @@ namespace VitaliyNULL.FusionManager
 
         private void Update()
         {
-            _leftMove |= Input.GetKeyDown(KeyCode.A);
-            _rightMove |= Input.GetKeyDown(KeyCode.D);
-            _backwardMove |= Input.GetKeyDown(KeyCode.S);
+            _leftMove = Input.GetKey(KeyCode.A);
+            _rightMove = Input.GetKey(KeyCode.D);
+            _backwardMove = Input.GetKey(KeyCode.S);
         }
 
         #endregion
@@ -113,17 +113,17 @@ namespace VitaliyNULL.FusionManager
             NetworkInputData data = new NetworkInputData();
             if (_leftMove)
             {
-                data.ToMoveX |= NetworkInputData.MoveLeft;
+                data.ToMoveX = NetworkInputData.MoveLeft;
             }
 
             if (_rightMove)
             {
-                data.ToMoveX |= NetworkInputData.MoveRight;
+                data.ToMoveX = NetworkInputData.MoveRight;
             }
 
             if (_backwardMove)
             {
-                data.ToMoveZ |= NetworkInputData.MoveBackward;
+                data.ToMoveZ = NetworkInputData.MoveBackward;
             }
 
             _leftMove = false;

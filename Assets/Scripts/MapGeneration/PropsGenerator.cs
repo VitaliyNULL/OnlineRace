@@ -46,10 +46,14 @@ namespace VitaliyNULL.MapGeneration
 
         #endregion
 
+        #region RPC
+
         [Rpc]
         private void RPC_SetParent(Prop prop)
         {
             prop?.Object.transform.SetParent(transform);
         }
+
+        #endregion
     }
 }

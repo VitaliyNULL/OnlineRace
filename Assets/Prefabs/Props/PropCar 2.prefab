@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7975946243079404642}
-  - component: {fileID: -3643018551652666905}
   - component: {fileID: 6515986760901994659}
   - component: {fileID: 8006416183018809386}
   - component: {fileID: 8082413787097192007}
+  - component: {fileID: 4935598829901844022}
+  - component: {fileID: 123798910615663430}
   m_Layer: 8
   m_Name: PropCar 2
   m_TagString: Untagged
@@ -36,19 +37,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-3643018551652666905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8576748363199181190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5e70b5be4694d7593eef336740e1224, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
 --- !u!114 &6515986760901994659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,9 +59,9 @@ MonoBehaviour:
     RawGuidValue: 8912a723dd772fb49839ef7cc73349fc
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: -3643018551652666905}
   - {fileID: 8006416183018809386}
   - {fileID: 8082413787097192007}
+  - {fileID: 4935598829901844022}
   SimulationBehaviours: []
 --- !u!114 &8006416183018809386
 MonoBehaviour:
@@ -116,6 +104,32 @@ MonoBehaviour:
     RotTeleportRadians: 1.5
   UseLegacySharedModeInterpolation: 0
   TargetInterpolationDelay: 0.03
+--- !u!114 &4935598829901844022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8576748363199181190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff3d86ebed143b487aaf29a98ea7caa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+--- !u!65 &123798910615663430
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8576748363199181190}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 2, z: 7}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1001 &3985868864575851231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -202,21 +216,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: a6c1dd22aab11f943a7de21a160938a7, type: 3}
   m_PrefabInstance: {fileID: 3985868864575851231}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3985868864575818879 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: a6c1dd22aab11f943a7de21a160938a7, type: 3}
-  m_PrefabInstance: {fileID: 3985868864575851231}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &7971686181911559727
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3985868864575818879}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3, y: 2, z: 7}
-  m_Center: {x: 0, y: 0, z: 0}
