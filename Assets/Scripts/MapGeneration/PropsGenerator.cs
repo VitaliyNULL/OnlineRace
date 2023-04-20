@@ -30,10 +30,10 @@ namespace VitaliyNULL.MapGeneration
             int iterations = Random.Range(0, 4);
             for (int i = 0; i < iterations; i++)
             {
-                SpawnPoint spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
+                SpawnPoint spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count-1)];
                 while (_spawnedProps[spawnPoint])
                 {
-                    spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
+                    spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count-1)];
                 }
 
                 _spawnedProps[spawnPoint] = true;
