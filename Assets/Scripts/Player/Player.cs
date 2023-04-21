@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using Cinemachine;
 using Fusion;
@@ -14,8 +15,27 @@ namespace VitaliyNULL.Player
 
         [SerializeField] private LayerMask _mapTileLayer;
         [SerializeField] private LayerMask _propLayer;
+        private MaterialChanger _materialChanger;
         private GameManager _gameManager;
+        private bool _isInvulnerable;
         [SerializeField] public PlayerMove playerMove;
+
+        #endregion
+
+        #region Public Properties
+
+        public bool IsInvulnerable
+        {
+            get => _isInvulnerable;
+            set
+            {
+                _isInvulnerable = value;
+                if (value)
+                {
+                    StartInvulnerability();
+                }
+            }
+        }
 
         #endregion
 
@@ -23,12 +43,18 @@ namespace VitaliyNULL.Player
 
         public override void Spawned()
         {
+            _materialChanger = GetComponentInChildren<MaterialChanger>();
             if (HasInputAuthority)
             {
                 CinemachineVirtualCamera Camera = FindObjectOfType<CinemachineVirtualCamera>();
-                Transform target = GetComponentInChildren<InterpolationTargetForCinemachine>().transform;
+                Transform target = _materialChanger.transform;
                 Camera.Follow = target;
                 Camera.LookAt = target;
+            }
+            else
+            {
+                //TODO: Change material to lowAlpha
+                _materialChanger.ChangeMaterialToLowAlpha();
             }
         }
 
@@ -55,6 +81,25 @@ namespace VitaliyNULL.Player
 
                 Debug.Log("Interact");
             }
+        }
+
+        #endregion
+
+        #region Coroutines
+
+        private IEnumerator WaitForInvulnerability()
+        {
+            yield return new WaitForSeconds(2f);
+            IsInvulnerable = false;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void StartInvulnerability()
+        {
+            StartCoroutine(WaitForInvulnerability());
         }
 
         #endregion

@@ -4,8 +4,8 @@ namespace VitaliyNULL.Props
     {
         public override void Interact(Player.Player player)
         {
-            player.playerMove.ForwardSpeed += 20;
-            player.playerMove.MultiplayerForwardSpeed += 0.3f;
+            player.playerMove.ForwardSpeed += 5;
+            player.playerMove.MultiplayerForwardSpeed += 0.1f;
             Runner?.Despawn(Object);
         }
     }

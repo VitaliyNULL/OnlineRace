@@ -1,12 +1,15 @@
 namespace VitaliyNULL.Props
 {
-    public class ManHole: Prop
+    public class ManHole : Prop
     {
         public override void Interact(Player.Player player)
         {
-
-            player.playerMove.ForwardSpeed -= 10f;
-            Runner?.Despawn(Object);
+            if (!player.IsInvulnerable)
+            {
+                player.playerMove.ForwardSpeed -= 10f;
+                player.playerMove.TeleportToBack();
+                player.IsInvulnerable = true;
+            }
         }
     }
 }

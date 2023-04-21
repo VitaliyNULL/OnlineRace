@@ -14,7 +14,7 @@ namespace VitaliyNULL.Player
         private bool _isMoving;
         private float _sideMoveSpeed = 10f;
         private readonly float _forwardSpeedMin = 40f;
-        private readonly float _forwardSpeedMax = 200f;
+        private readonly float _forwardSpeedMax = 120f;
         private float _forwardSpeed;
 
         private float _multiplayerForwardSpeed = 1f;
@@ -108,6 +108,11 @@ namespace VitaliyNULL.Player
             StartCoroutine(StopAddingSpeed(time));
         }
 
+        public void TeleportToBack()
+        {
+            _networkTransform.TeleportToPosition(_networkTransform.transform.position + Vector3.back * 5);
+        }
+
         #endregion
 
         #region Coroutines
@@ -141,7 +146,7 @@ namespace VitaliyNULL.Player
             _networkTransform.transform.position = Vector3.Lerp(_networkTransform.transform.position,
                 new Vector3(toMoveX, _networkTransform.transform.position.y,
                     _networkTransform.transform.position.z), 1);
- 
+
             _isMoving = false;
         }
 

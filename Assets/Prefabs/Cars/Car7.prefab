@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 400000}
   - component: {fileID: 6279614155057669365}
+  - component: {fileID: 5808963422025733652}
   m_Layer: 0
   m_Name: Car7
   m_TagString: Untagged
@@ -64,6 +65,24 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2300000}
   m_Enabled: 1
+--- !u!114 &5808963422025733652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a61ab799a51c35041a9eb3a9883771d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lowAlphaMaterial: {fileID: 2100000, guid: 2bc1f65e6a3ead245a598cdcc03fb57e, type: 2}
+  _carBody: {fileID: 2300000}
+  _frontLeftWheel: {fileID: 2300004}
+  _frontRightWheeel: {fileID: 2300008}
+  _rearLeftWheel: {fileID: 2300002}
+  _rearRightWheel: {fileID: 2300006}
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0

@@ -69,11 +69,11 @@ namespace VitaliyNULL.FusionManager
         {
             _players.Add(player);
             Debug.LogError(player.Object.Id);
-            if (player.Object.InputAuthority.PlayerId == Object.InputAuthority.PlayerId)
-            {
+            // if (player.Object.InputAuthority.PlayerId == Object.InputAuthority.PlayerId)
+            // {
                 Debug.LogError(player.Object.InputAuthority.PlayerId + " " + Object.InputAuthority.PlayerId);
                 player.InitGameManager(this);
-            }
+            // }
         }
 
         #endregion
