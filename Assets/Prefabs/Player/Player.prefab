@@ -123,7 +123,7 @@ MonoBehaviour:
     RotBlendEnd: 0.5
     RotTeleportRadians: 1.5
   UseLegacySharedModeInterpolation: 0
-  TargetInterpolationDelay: 0.03
+  TargetInterpolationDelay: 0
 --- !u!65 &7642168311702406839
 BoxCollider:
   m_ObjectHideFlags: 0
