@@ -63,9 +63,7 @@ namespace VitaliyNULL.Player
 
         public override void FixedUpdateNetwork()
         {
-            // _rigidbody.Rigidbody.MovePosition(new Vector3(_rigidbody.Rigidbody.position.x,
-            //     _rigidbody.Rigidbody.position.y,
-            //     _rigidbody.Rigidbody.position.z + ForwardSpeed * Runner.DeltaTime));
+            
             _networkTransform.transform.position = Vector3.Lerp(_networkTransform.transform.position,
                 _networkTransform.transform.position + Vector3.forward * ForwardSpeed * Runner.DeltaTime, 1);
 

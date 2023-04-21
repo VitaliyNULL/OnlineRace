@@ -38,18 +38,10 @@ namespace VitaliyNULL.MapGeneration
             }
         }
 
-        public void StartChainToDisableTile(MapTile mapTile, int index)
+        public void StartDisablingTile(MapTile mapTile, int index)
         {
             if (mapTile._isDisabling) return;
-            if (mapTile.previousMapTile.previousMapTile == null && index < 5)
-            {
-                mapTile.RPC_DisablePrevTile();
-            }
-            else if (mapTile.previousMapTile != null && index < 5)
-            {
-                index++;
-                mapTile.StartChainToDisableTile(mapTile.previousMapTile, index);
-            }
+            mapTile.RPC_DisableTile();
         }
 
         /// <summary>
@@ -68,6 +60,12 @@ namespace VitaliyNULL.MapGeneration
         {
             previousMapTile?.gameObject.SetActive(false);
             Debug.Log("Disable prev tile");
+        }
+
+        private void DisableTile()
+        {
+            gameObject.SetActive(false);
+            Debug.Log("Disable tile");
         }
 
         /// <summary>
@@ -98,11 +96,11 @@ namespace VitaliyNULL.MapGeneration
 
         #region Coroutines
 
-        private IEnumerator WaitForDespawn()
+        private IEnumerator WaitForDespawnTile()
         {
             _isDisabling = true;
-            yield return new WaitForSeconds(10);
-            DisablePrevTile();
+            yield return new WaitForSeconds(20);
+            DisableTile();
         }
 
         #endregion
@@ -117,9 +115,9 @@ namespace VitaliyNULL.MapGeneration
 
 
         [Rpc]
-        private void RPC_DisablePrevTile()
+        private void RPC_DisableTile()
         {
-            StartCoroutine(WaitForDespawn());
+            StartCoroutine(WaitForDespawnTile());
         }
 
         #endregion

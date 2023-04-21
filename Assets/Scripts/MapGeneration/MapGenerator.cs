@@ -19,7 +19,7 @@ namespace VitaliyNULL.MapGeneration
         //variables for generation tiles
         private readonly int _tilecount = 100;
         private readonly int _step = 60;
-        private readonly int _startZ = -60;
+        private readonly int _startZ = -10;
 
         #endregion
 
