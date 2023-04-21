@@ -63,12 +63,10 @@ namespace VitaliyNULL.Player
 
         public override void FixedUpdateNetwork()
         {
-            
-            _networkTransform.transform.position = Vector3.Lerp(_networkTransform.transform.position,
-                _networkTransform.transform.position + Vector3.forward * ForwardSpeed * Runner.DeltaTime, 1);
-
             if (GetInput(out NetworkInputData data))
             {
+                _networkTransform.Transform.position = Vector3.Lerp(_networkTransform.Transform.position,
+                    _networkTransform.Transform.position + Vector3.forward * ForwardSpeed * Runner.DeltaTime, 1);
                 if (_isPickingUpSpeed)
                 {
                     ForwardSpeed += 0.01f * MultiplayerForwardSpeed;
@@ -137,18 +135,13 @@ namespace VitaliyNULL.Player
                     new Vector3(xPositionToMove,
                         _networkTransform.transform.position.y,
                         _networkTransform.transform.position.z), 1);
-                // _networkTransform.TeleportToPosition(new Vector3(xPositionToMove,
-                //     _networkTransform.transform.position.y,
-                //     _networkTransform.transform.position.z));
-
                 yield return new WaitForEndOfFrame();
             }
 
             _networkTransform.transform.position = Vector3.Lerp(_networkTransform.transform.position,
                 new Vector3(toMoveX, _networkTransform.transform.position.y,
                     _networkTransform.transform.position.z), 1);
-            // _networkTransform.transform.position =
-            //     new Vector3(toMoveX, _networkTransform.transform.position.y, _networkTransform.transform.position.z);
+ 
             _isMoving = false;
         }
 

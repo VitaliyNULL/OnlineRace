@@ -23,13 +23,13 @@ namespace VitaliyNULL.Player
 
         public override void Spawned()
         {
-            // if (HasInputAuthority)
-            // {
-            //     CinemachineVirtualCamera Camera = FindObjectOfType<CinemachineVirtualCamera>();
-            //     Transform target = GetComponentInChildren<InterpolationTargetForCinemachine>().transform;
-            //     Camera.Follow = target;
-            //     Camera.LookAt = target;
-            // }
+            if (HasInputAuthority)
+            {
+                CinemachineVirtualCamera Camera = FindObjectOfType<CinemachineVirtualCamera>();
+                Transform target = GetComponentInChildren<InterpolationTargetForCinemachine>().transform;
+                Camera.Follow = target;
+                Camera.LookAt = target;
+            }
         }
 
         public override void FixedUpdateNetwork()
