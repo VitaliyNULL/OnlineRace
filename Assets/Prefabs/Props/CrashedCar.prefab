@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -6303821820834681498}
   - component: {fileID: -2323418576540947146}
   - component: {fileID: -1813184574327645031}
+  - component: {fileID: 4170795955238406685}
   m_Layer: 8
   m_Name: CrashedCar
   m_TagString: Untagged
@@ -121,6 +122,19 @@ LODGroup:
     renderers:
     - renderer: {fileID: 343895519302362787}
   m_Enabled: 1
+--- !u!65 &4170795955238406685
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2824514981423299563}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.4349554, y: 2.191531, z: 7.161528}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4364068041421037444
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +146,6 @@ GameObject:
   - component: {fileID: 5555488924492320672}
   - component: {fileID: 8911761772211243770}
   - component: {fileID: 343895519302362787}
-  - component: {fileID: 3936781463624010528}
   m_Layer: 8
   m_Name: CarBody
   m_TagString: Untagged
@@ -205,16 +218,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3936781463624010528
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4364068041421037444}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.4349554, y: 2.191531, z: 7.161528}
-  m_Center: {x: 0, y: 0, z: 0}

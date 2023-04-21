@@ -66,13 +66,11 @@ namespace VitaliyNULL.Player
             // _rigidbody.Rigidbody.MovePosition(new Vector3(_rigidbody.Rigidbody.position.x,
             //     _rigidbody.Rigidbody.position.y,
             //     _rigidbody.Rigidbody.position.z + ForwardSpeed * Runner.DeltaTime));
+            _networkTransform.transform.position = Vector3.Lerp(_networkTransform.transform.position,
+                _networkTransform.transform.position + Vector3.forward * ForwardSpeed * Runner.DeltaTime, 1);
 
             if (GetInput(out NetworkInputData data))
             {
-                _networkTransform.TeleportToPosition(new Vector3(_networkTransform.transform.position.x,
-                    _networkTransform.transform.position.y,
-                    _networkTransform.transform.position.z + ForwardSpeed * Runner.DeltaTime));
-
                 if (_isPickingUpSpeed)
                 {
                     ForwardSpeed += 0.01f * MultiplayerForwardSpeed;
@@ -137,15 +135,22 @@ namespace VitaliyNULL.Player
             while (_networkTransform.transform.position.x > toMoveX)
             {
                 xPositionToMove -= Mathf.Abs(_sideMoveSpeed * Runner.DeltaTime);
-                _networkTransform.TeleportToPosition(new Vector3(xPositionToMove,
-                    _networkTransform.transform.position.y,
-                    _networkTransform.transform.position.z));
+                _networkTransform.transform.position = Vector3.Lerp(_networkTransform.transform.position,
+                    new Vector3(xPositionToMove,
+                        _networkTransform.transform.position.y,
+                        _networkTransform.transform.position.z), 1);
+                // _networkTransform.TeleportToPosition(new Vector3(xPositionToMove,
+                //     _networkTransform.transform.position.y,
+                //     _networkTransform.transform.position.z));
 
                 yield return new WaitForEndOfFrame();
             }
 
-            _networkTransform.transform.position =
-                new Vector3(toMoveX, _networkTransform.transform.position.y, _networkTransform.transform.position.z);
+            _networkTransform.transform.position = Vector3.Lerp(_networkTransform.transform.position,
+                new Vector3(toMoveX, _networkTransform.transform.position.y,
+                    _networkTransform.transform.position.z), 1);
+            // _networkTransform.transform.position =
+            //     new Vector3(toMoveX, _networkTransform.transform.position.y, _networkTransform.transform.position.z);
             _isMoving = false;
         }
 
@@ -174,15 +179,23 @@ namespace VitaliyNULL.Player
             while (_networkTransform.transform.position.x < toMoveX)
             {
                 xPositionToMove += Mathf.Abs(_sideMoveSpeed * Runner.DeltaTime);
-                _networkTransform.TeleportToPosition(new Vector3(xPositionToMove,
-                    _networkTransform.transform.position.y,
-                    _networkTransform.transform.position.z));
+                _networkTransform.transform.position = Vector3.Lerp(_networkTransform.transform.position,
+                    new Vector3(xPositionToMove,
+                        _networkTransform.transform.position.y,
+                        _networkTransform.transform.position.z), 1);
+                // _networkTransform.TeleportToPosition(new Vector3(xPositionToMove,
+                //     _networkTransform.transform.position.y,
+                //     _networkTransform.transform.position.z));
 
                 yield return new WaitForEndOfFrame();
             }
 
-            _networkTransform.transform.position =
-                new Vector3(toMoveX, _networkTransform.transform.position.y, _networkTransform.transform.position.z);
+            _networkTransform.transform.position = Vector3.Lerp(_networkTransform.transform.position,
+                new Vector3(toMoveX, _networkTransform.transform.position.y,
+                    _networkTransform.transform.position.z), 1);
+
+            // _networkTransform.transform.position =
+            //     new Vector3(toMoveX, _networkTransform.transform.position.y, _networkTransform.transform.position.z);
             _isMoving = false;
         }
 

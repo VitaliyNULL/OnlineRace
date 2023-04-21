@@ -33,24 +33,26 @@ namespace VitaliyNULL.Player
 
         public override void FixedUpdateNetwork()
         {
-            
-
             if (!HasStateAuthority) return;
             RaycastHit raycastHit;
             if (Physics.Raycast(transform.position, Vector3.down, out raycastHit, 3, _mapTileLayer))
             {
                 MapTile mapTile = raycastHit.collider.GetComponent<MapTile>();
                 mapTile.StartChainToActiveTile(mapTile, 0);
+                // mapTile.StartChainToDisableTile(mapTile, 0);
             }
+
             var colliders =
                 Physics.OverlapBox(transform.position, new Vector3(3, 2, 7), Quaternion.identity, _propLayer);
             if (colliders != null)
             {
-                var prop = colliders.SingleOrDefault().GetComponent<Prop>();
                 // RPC_InteractWithProp(prop, this);
-                prop.Interact(this);
+                foreach (var collider in colliders)
+                {
+                    collider.GetComponent<Prop>().Interact(this);
+                }
+
                 Debug.Log("Interact");
-                
             }
         }
 

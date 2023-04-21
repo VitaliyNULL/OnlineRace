@@ -6,7 +6,7 @@ namespace VitaliyNULL.Props
         {
             player.playerMove.ForwardSpeed += 20;
             player.playerMove.MultiplayerForwardSpeed += 0.3f;
-            Runner.Despawn(Object);
+            Runner?.Despawn(Object);
         }
     }
 }

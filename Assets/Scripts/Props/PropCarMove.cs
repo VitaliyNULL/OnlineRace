@@ -70,8 +70,10 @@ namespace VitaliyNULL.Props
                 return;
             }
 
-            _networkTransform.TeleportToPosition(_networkTransform.transform.position +
-                                                 _directionToMove * _speed * Runner.DeltaTime);
+            _networkTransform.transform.position = Vector3.Lerp(_networkTransform.transform.position,
+                _networkTransform.transform.position + _directionToMove * _speed * Runner.DeltaTime, 1);
+            // _networkTransform.TeleportToPosition(_networkTransform.transform.position +
+            //                                      _directionToMove * _speed * Runner.DeltaTime);
         }
 
         #endregion

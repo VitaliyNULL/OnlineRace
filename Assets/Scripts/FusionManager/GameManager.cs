@@ -10,6 +10,26 @@ namespace VitaliyNULL.FusionManager
 
         [SerializeField] private NetworkPrefabRef _prefabRef;
         [SerializeField] private List<Player.Player> _players = new List<Player.Player>();
+        private bool _isGameStarted;
+
+        #endregion
+
+        #region Public Properties
+
+        public bool IsGameStarted
+        {
+            get => _isGameStarted;
+            set
+            {
+                if (_isGameStarted)
+                {
+                    //TODO: Activate counter 3.2.1.. GO
+                }
+                else
+                {
+                }
+            }
+        }
 
         #endregion
 
@@ -39,15 +59,16 @@ namespace VitaliyNULL.FusionManager
                     Vector3 spawnPosition =
                         new Vector3(3 + (player.RawEncoded % Runner.Config.Simulation.DefaultPlayers) * 5, -10.5f, 0);
                     NetworkObject networkObject = Runner.Spawn(_prefabRef, spawnPosition, Quaternion.identity, player);
-                    RPC_UpdatePlayerLis(networkObject.GetComponent<Player.Player>());
+                    RPC_UpdatePlayerList(networkObject.GetComponent<Player.Player>());
                 }
             }
         }
 
         [Rpc]
-        private void RPC_UpdatePlayerLis(Player.Player player)
+        private void RPC_UpdatePlayerList(Player.Player player)
         {
             _players.Add(player);
+            Debug.LogError(player.Object.Id);
             if (player.Object.InputAuthority.PlayerId == Object.InputAuthority.PlayerId)
             {
                 Debug.LogError(player.Object.InputAuthority.PlayerId + " " + Object.InputAuthority.PlayerId);
