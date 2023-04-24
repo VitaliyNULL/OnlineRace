@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d42594000bed8de429fd22c181be00ab
+guid: 694d9b6f5f80c3849baef2972f2de1d7
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -20,14 +20,11 @@ PluginImporter:
         Exclude Editor: 1
         Exclude Linux64: 1
         Exclude OSXUniversal: 1
-        Exclude PS4: 0
-        Exclude PS5: 0
-        Exclude Switch: 0
         Exclude WebGL: 1
         Exclude Win: 1
         Exclude Win64: 1
-        Exclude WindowsStoreApps: 1
-        Exclude iOS: 0
+        Exclude WindowsStoreApps: 0
+        Exclude iOS: 1
         Exclude tvOS: 1
   - first:
       Android: Android
@@ -48,21 +45,6 @@ PluginImporter:
         CPU: AnyCPU
         DefaultValueInitialized: true
         OS: AnyOS
-  - first:
-      Nintendo Switch: Switch
-    second:
-      enabled: 1
-      settings: {}
-  - first:
-      PS4: PS4
-    second:
-      enabled: 1
-      settings: {}
-  - first:
-      PS5: PS5
-    second:
-      enabled: 1
-      settings: {}
   - first:
       Standalone: Linux64
     second:
@@ -90,17 +72,17 @@ PluginImporter:
   - first:
       Windows Store Apps: WindowsStoreApps
     second:
-      enabled: 0
+      enabled: 1
       settings:
-        CPU: AnyCPU
+        CPU: X64
         DontProcess: false
         PlaceholderPath: 
         SDK: UWP
-        ScriptingBackend: Il2Cpp
+        ScriptingBackend: AnyScriptingBackend
   - first:
       iPhone: iOS
     second:
-      enabled: 1
+      enabled: 0
       settings:
         AddToEmbeddedBinaries: false
         CPU: AnyCPU
