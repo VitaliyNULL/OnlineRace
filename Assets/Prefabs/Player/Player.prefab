@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
+  _interpolationDataSource: 3
   InterpolationSpace: 0
   InterpolationTarget: {fileID: 6318063678450814400}
   InterpolateErrorCorrection: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
     RotBlendEnd: 0.5
     RotTeleportRadians: 1.5
   UseLegacySharedModeInterpolation: 0
-  TargetInterpolationDelay: 0
+  TargetInterpolationDelay: 0.03
 --- !u!65 &7642168311702406839
 BoxCollider:
   m_ObjectHideFlags: 0
