@@ -5,6 +5,7 @@ using Firebase.Auth;
 using Firebase.Database;
 using UnityEngine;
 using UnityEngine.Events;
+using VitaliyNULL.Core;
 using VitaliyNULL.MenuSceneUI.LoginAndRegistration;
 
 namespace VitaliyNULL.FirebaseManager
@@ -13,8 +14,6 @@ namespace VitaliyNULL.FirebaseManager
     {
         #region Private Fields
 
-        private readonly string _passwordKey = "PASSWORD";
-        private readonly string _emailKey = "EMAIL";
         private bool _isSavingData = false;
 
         //Firebase variables
@@ -103,7 +102,7 @@ namespace VitaliyNULL.FirebaseManager
         }
 
         #endregion
-        
+
         #region Coroutines
 
         private IEnumerator WaitForAutoLogin(string email, string password, UnityAction openMainMenu)
@@ -215,8 +214,8 @@ namespace VitaliyNULL.FirebaseManager
                 Debug.LogFormat("User signed in successfully: {0} ({1})", _user.DisplayName, _user.Email);
                 StartCoroutine(LoadUserData());
                 // StartCoroutine(LoadScoreBoardData());
-                PlayerPrefs.SetString(_passwordKey, passwordInput.password);
-                PlayerPrefs.SetString(_emailKey, emailInput.email);
+                PlayerPrefs.SetString(ConstKeys.PasswordKey, passwordInput.password);
+                PlayerPrefs.SetString(ConstKeys.EmailKey, emailInput.email);
                 //TODO: Open MainMenu
                 openMainMenu.Invoke();
             }
@@ -281,11 +280,10 @@ namespace VitaliyNULL.FirebaseManager
                         //Create a user profile and set the username
                         StartCoroutine(LoadUserData());
                         // StartCoroutine(LoadScoreBoardData());
-                        PlayerPrefs.SetString(_passwordKey, passwordInput.password);
-                        PlayerPrefs.SetString(_emailKey, emailInput.email);
+                        PlayerPrefs.SetString(ConstKeys.PasswordKey, passwordInput.password);
+                        PlayerPrefs.SetString(ConstKeys.EmailKey, emailInput.email);
                         //TODO: OpenMainMenu
                         openMainMenu.Invoke();
-                        
                     }
                 }
             }
@@ -365,6 +363,5 @@ namespace VitaliyNULL.FirebaseManager
         }
 
         #endregion
-        
     }
 }

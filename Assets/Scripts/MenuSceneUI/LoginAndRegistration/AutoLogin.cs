@@ -1,4 +1,5 @@
 using UnityEngine;
+using VitaliyNULL.Core;
 
 namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
 {
@@ -10,8 +11,6 @@ namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
         [SerializeField] private GameObject _loadingUI;
         [SerializeField] private GameObject _mainMenuUI;
         [SerializeField] private GameObject _registrationUI;
-        private readonly string _passwordKey = "PASSWORD";
-        private readonly string _emailKey = "EMAIL";
 
         #endregion
 
@@ -20,10 +19,11 @@ namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
 
         private void Start()
         {
-            if (PlayerPrefs.HasKey(_emailKey))
+            if (PlayerPrefs.HasKey(ConstKeys.EmailKey))
             {
                 _firebaseManager.InitializeFirebase();
-                _firebaseManager.AutoLogin(PlayerPrefs.GetString(_emailKey), PlayerPrefs.GetString(_passwordKey),
+                _firebaseManager.AutoLogin(PlayerPrefs.GetString(ConstKeys.EmailKey),
+                    PlayerPrefs.GetString(ConstKeys.PasswordKey),
                     () =>
                     {
                         _loadingUI.SetActive(false);

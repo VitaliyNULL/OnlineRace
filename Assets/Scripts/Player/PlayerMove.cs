@@ -16,12 +16,27 @@ namespace VitaliyNULL.Player
         private readonly float _forwardSpeedMin = 40f;
         private readonly float _forwardSpeedMax = 120f;
         private float _forwardSpeed;
-
         private float _multiplayerForwardSpeed = 1f;
+        private float _distance = 0f;
 
         // private NetworkRigidbody _rigidbody;
         private NetworkTransform _networkTransform;
         private bool _isPickingUpSpeed = true;
+        [SerializeField] private PlayerNetworkedData _networkedData;
+
+        #endregion
+
+        #region Private Properties
+
+        private float Distance
+        {
+            get => _distance;
+            set
+            {
+                _distance = value;
+                _networkedData.UpdateDistance(_distance);
+            }
+        }
 
         #endregion
 
@@ -67,6 +82,7 @@ namespace VitaliyNULL.Player
             {
                 _networkTransform.Transform.position = Vector3.Lerp(_networkTransform.Transform.position,
                     _networkTransform.Transform.position + Vector3.forward * ForwardSpeed * Runner.DeltaTime, 1);
+                Distance += ForwardSpeed * Runner.DeltaTime / 3.6f;
                 if (_isPickingUpSpeed)
                 {
                     ForwardSpeed += 0.01f * MultiplayerForwardSpeed;
