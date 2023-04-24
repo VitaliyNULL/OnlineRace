@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using Fusion;
 using UnityEngine;
 using VitaliyNULL.Core;
+using VitaliyNULL.InGameUI;
 
 namespace VitaliyNULL.Player
 {
@@ -15,14 +17,14 @@ namespace VitaliyNULL.Player
         private float _sideMoveSpeed = 10f;
         private readonly float _forwardSpeedMin = 40f;
         private readonly float _forwardSpeedMax = 120f;
-        private float _forwardSpeed;
-        private float _multiplayerForwardSpeed = 1f;
+        private float _forwardSpeed { get; set; }
+        private float _multiplayerForwardSpeed { get; set; }
         private float _distance = 0f;
+        private GameUI _gameUI;
 
         // private NetworkRigidbody _rigidbody;
         private NetworkTransform _networkTransform;
         private bool _isPickingUpSpeed = true;
-        [SerializeField] private PlayerNetworkedData _networkedData;
 
         #endregion
 
@@ -34,7 +36,7 @@ namespace VitaliyNULL.Player
             set
             {
                 _distance = value;
-                _networkedData.UpdateDistance(_distance);
+                _gameUI.UpdatePlayerDistance(_distance);
             }
         }
 
@@ -73,22 +75,37 @@ namespace VitaliyNULL.Player
             // _rigidbody ??= GetComponent<NetworkRigidbody>();
             _networkTransform ??= GetComponent<NetworkTransform>();
             _currentPositionIndex = 0;
+            _forwardSpeed = 40;
+            _multiplayerForwardSpeed = 1;
+            _gameUI = FindObjectOfType<GameUI>();
         }
 
 
-        public override void FixedUpdateNetwork()
+        private void Update()
         {
-            if (GetInput(out NetworkInputData data))
+            if (HasInputAuthority)
+                Distance += ForwardSpeed * Time.deltaTime / 3.6f;
+        }
+
+        private void FixedUpdate()
+        {
+            if (HasInputAuthority)
             {
-                _networkTransform.Transform.position = Vector3.Lerp(_networkTransform.Transform.position,
-                    _networkTransform.Transform.position + Vector3.forward * ForwardSpeed * Runner.DeltaTime, 1);
-                Distance += ForwardSpeed * Runner.DeltaTime / 3.6f;
                 if (_isPickingUpSpeed)
                 {
                     ForwardSpeed += 0.01f * MultiplayerForwardSpeed;
                 }
 
                 MultiplayerForwardSpeed -= 0.001f;
+            }
+        }
+
+        public override void FixedUpdateNetwork()
+        {
+            _networkTransform.Transform.position = Vector3.Lerp(_networkTransform.Transform.position,
+                _networkTransform.Transform.position + Vector3.forward * ForwardSpeed * Runner.DeltaTime, 1);
+            if (GetInput(out NetworkInputData data))
+            {
                 if ((data.ToMoveZ & NetworkInputData.MoveBackward) != 0)
                 {
                     ForwardSpeed -= 1f;

@@ -77,8 +77,6 @@ namespace VitaliyNULL.Player
                 {
                     collider.GetComponent<Prop>().Interact(this);
                 }
-
-                Debug.Log("Interact");
             }
         }
 
