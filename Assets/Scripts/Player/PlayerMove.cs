@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Fusion;
 using UnityEngine;
@@ -11,6 +10,7 @@ namespace VitaliyNULL.Player
     {
         #region Private Fields
 
+        [SerializeField] private Player _player;
         private readonly float[] _toMoveXPositions = { -8, -3, 3, 8 };
         private int _currentPositionIndex;
         private bool _isMoving;
@@ -19,10 +19,9 @@ namespace VitaliyNULL.Player
         private readonly float _forwardSpeedMax = 120f;
         private float _forwardSpeed { get; set; }
         private float _multiplayerForwardSpeed { get; set; }
-        private float _distance = 0f;
-        private GameUI _gameUI;
+        private float _distance;
+        [Networked] private bool _finished { get; set; }
 
-        // private NetworkRigidbody _rigidbody;
         private NetworkTransform _networkTransform;
         private bool _isPickingUpSpeed = true;
 
@@ -30,13 +29,13 @@ namespace VitaliyNULL.Player
 
         #region Private Properties
 
-        private float Distance
+        public float Distance
         {
             get => _distance;
             set
             {
                 _distance = value;
-                _gameUI.UpdatePlayerDistance(_distance);
+                _player.gameManager.gameUI.UpdatePlayerDistance(_distance);
             }
         }
 
@@ -62,7 +61,6 @@ namespace VitaliyNULL.Player
 
         private void Awake()
         {
-            // _rigidbody ??= GetComponent<NetworkRigidbody>();
             _networkTransform ??= GetComponent<NetworkTransform>();
         }
 
@@ -72,24 +70,29 @@ namespace VitaliyNULL.Player
 
         public override void Spawned()
         {
-            // _rigidbody ??= GetComponent<NetworkRigidbody>();
             _networkTransform ??= GetComponent<NetworkTransform>();
             _currentPositionIndex = 0;
             _forwardSpeed = 40;
             _multiplayerForwardSpeed = 1;
-            _gameUI = FindObjectOfType<GameUI>();
         }
 
 
-        private void Update()
+        public override void FixedUpdateNetwork()
         {
-            if (HasInputAuthority)
-                Distance += ForwardSpeed * Time.deltaTime / 3.6f;
-        }
+            if (!_player.gameManager.IsGameStarted || _finished) return;
+            _networkTransform.Transform.position = Vector3.Lerp(_networkTransform.Transform.position,
+                _networkTransform.Transform.position + Vector3.forward * ForwardSpeed * Runner.DeltaTime, 1);
 
-        private void FixedUpdate()
-        {
             if (HasInputAuthority)
+            {
+                Distance = _player.gameManager.finishTile.transform.position.z - transform.position.z;
+                if (Distance < 0)
+                {
+                    RPC_Finish();
+                }
+            }
+
+            if (GetInput(out NetworkInputData data))
             {
                 if (_isPickingUpSpeed)
                 {
@@ -97,15 +100,6 @@ namespace VitaliyNULL.Player
                 }
 
                 MultiplayerForwardSpeed -= 0.001f;
-            }
-        }
-
-        public override void FixedUpdateNetwork()
-        {
-            _networkTransform.Transform.position = Vector3.Lerp(_networkTransform.Transform.position,
-                _networkTransform.Transform.position + Vector3.forward * ForwardSpeed * Runner.DeltaTime, 1);
-            if (GetInput(out NetworkInputData data))
-            {
                 if ((data.ToMoveZ & NetworkInputData.MoveBackward) != 0)
                 {
                     ForwardSpeed -= 1f;
@@ -152,19 +146,6 @@ namespace VitaliyNULL.Player
 
         private IEnumerator StartMovingLeft(float toMoveX)
         {
-            // float xPositionToMove = _rigidbody.Rigidbody.position.x;
-
-            // while (_rigidbody.Rigidbody.position.x > toMoveX)
-            // {
-            //     xPositionToMove -= Mathf.Abs(_sideMoveSpeed * Runner.DeltaTime);
-            //     _rigidbody.Rigidbody.MovePosition(new Vector3(xPositionToMove, _rigidbody.Rigidbody.position.y,
-            //         _rigidbody.Rigidbody.position.z));
-            //
-            //     yield return new WaitForEndOfFrame();
-            // }
-            //
-            // _rigidbody.Rigidbody.position =
-            //     new Vector3(toMoveX, _rigidbody.Rigidbody.position.y, _rigidbody.Rigidbody.position.z);
             float xPositionToMove = _networkTransform.transform.position.x;
             while (_networkTransform.transform.position.x > toMoveX)
             {
@@ -192,18 +173,6 @@ namespace VitaliyNULL.Player
 
         private IEnumerator StartMovingRight(float toMoveX)
         {
-            // float xPositionToMove = _rigidbody.Rigidbody.position.x;
-            // while (_rigidbody.Rigidbody.position.x < toMoveX)
-            // {
-            //     xPositionToMove += Mathf.Abs(_sideMoveSpeed * Runner.DeltaTime);
-            //     _rigidbody.Rigidbody.MovePosition(new Vector3(xPositionToMove, _rigidbody.Rigidbody.position.y,
-            //         _rigidbody.Rigidbody.position.z));
-            //
-            //     yield return new WaitForEndOfFrame();
-            // }
-            //
-            // _rigidbody.Rigidbody.position =
-            //     new Vector3(toMoveX, _rigidbody.Rigidbody.position.y, _rigidbody.Rigidbody.position.z);
             float xPositionToMove = _networkTransform.transform.position.x;
             while (_networkTransform.transform.position.x < toMoveX)
             {
@@ -212,10 +181,6 @@ namespace VitaliyNULL.Player
                     new Vector3(xPositionToMove,
                         _networkTransform.transform.position.y,
                         _networkTransform.transform.position.z), 1);
-                // _networkTransform.TeleportToPosition(new Vector3(xPositionToMove,
-                //     _networkTransform.transform.position.y,
-                //     _networkTransform.transform.position.z));
-
                 yield return new WaitForEndOfFrame();
             }
 
@@ -223,9 +188,18 @@ namespace VitaliyNULL.Player
                 new Vector3(toMoveX, _networkTransform.transform.position.y,
                     _networkTransform.transform.position.z), 1);
 
-            // _networkTransform.transform.position =
-            //     new Vector3(toMoveX, _networkTransform.transform.position.y, _networkTransform.transform.position.z);
             _isMoving = false;
+        }
+
+        #endregion
+
+        #region RPC
+        
+        [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority)]
+        private void RPC_Finish()
+        {
+            Debug.Log("You win");
+            _finished = true;
         }
 
         #endregion

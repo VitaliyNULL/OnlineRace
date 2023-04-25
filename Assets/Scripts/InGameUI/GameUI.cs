@@ -9,7 +9,7 @@ namespace VitaliyNULL.InGameUI
 
         [SerializeField] private TMP_Text _nickName;
         [SerializeField] private TMP_Text _distance;
-        // [SerializeField] private TMP_Text _position;
+        [SerializeField] private TMP_Text _position;
 
         #endregion
 
@@ -27,7 +27,7 @@ namespace VitaliyNULL.InGameUI
 
         public void UpdatePlayerPosition(short position)
         {
-            _distance.text = position.ToString();
+            _position.text = position.ToString();
         }
 
         #endregion

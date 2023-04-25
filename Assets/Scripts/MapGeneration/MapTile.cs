@@ -1,6 +1,7 @@
 using System.Collections;
 using Fusion;
 using UnityEngine;
+using VitaliyNULL.FusionManager;
 
 namespace VitaliyNULL.MapGeneration
 {
@@ -82,6 +83,7 @@ namespace VitaliyNULL.MapGeneration
         public void GenerateFinish()
         {
             Debug.Log("Generated Finish");
+            RPC_InitFinishTile();
         }
 
         /// <summary>
@@ -113,6 +115,11 @@ namespace VitaliyNULL.MapGeneration
             SetActiveNextTile();
         }
 
+        [Rpc]
+        private void RPC_InitFinishTile()
+        {
+            FindObjectOfType<GameManager>().SetFinish(this);
+        }
 
         [Rpc]
         private void RPC_DisableTile()

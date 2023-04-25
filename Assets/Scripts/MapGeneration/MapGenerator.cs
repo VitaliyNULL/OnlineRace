@@ -13,13 +13,12 @@ namespace VitaliyNULL.MapGeneration
         private List<MapTile> _spawnedTiles = new List<MapTile>();
         private MapTile _prevMapTile;
         private MapTile _currentMapTile;
-
         private MapTile _nextMapTile;
 
         //variables for generation tiles
         private readonly int _tilecount = 100;
         private readonly int _step = 60;
-        private readonly int _startZ = -10;
+        private readonly int _startZ = -20;
 
         #endregion
 
@@ -36,29 +35,11 @@ namespace VitaliyNULL.MapGeneration
 
         #endregion
 
-        #region Private Methods
+        #region Public Methods
 
-        // /// <summary>
-        // /// Use this method when spawning MapTile
-        // /// </summary>
-        // /// <param name="mapTile"> Object that spawned</param>
-        // private void SetMapTileHierarchy(MapTile mapTile)
-        // {
-        //     if (_prevMapTile != null)
-        //     {
-        //         _prevMapTile.nextMapTile = _currentMapTile;
-        //     }
-        //
-        //     if (_currentMapTile != null)
-        //     {
-        //         _prevMapTile = _currentMapTile;
-        //         _currentMapTile = mapTile;
-        //         _currentMapTile.previousMapTile = _prevMapTile; // prev !=null, current !=null, next == null
-        //         return;
-        //     }
-        //
-        //     _currentMapTile = mapTile;
-        // }
+        #endregion
+
+        #region Private Methods
 
         /// <summary>
         /// This method using only in init Game session
@@ -69,7 +50,6 @@ namespace VitaliyNULL.MapGeneration
             for (int i = 0; i < _tilecount; i++)
             {
                 MapTile mapTile = Runner.Spawn(_mapTiles[0], new Vector3(0, -12, nextZ), Quaternion.identity);
-                mapTile.GenerateTile();
                 RPC_UpdateSpawnedTiles(mapTile);
                 RPC_SetHierarchy(mapTile, _prevMapTile);
                 RPC_RenameTile(mapTile, i);

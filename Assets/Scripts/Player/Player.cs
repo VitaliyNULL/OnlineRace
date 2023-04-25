@@ -15,7 +15,7 @@ namespace VitaliyNULL.Player
         [SerializeField] private LayerMask _mapTileLayer;
         [SerializeField] private LayerMask _propLayer;
         private MaterialChanger _materialChanger;
-        private GameManager _gameManager;
+        [HideInInspector] public GameManager gameManager;
         private bool _isInvulnerable;
         [SerializeField] public PlayerMove playerMove;
 
@@ -105,7 +105,7 @@ namespace VitaliyNULL.Player
 
         public void InitGameManager(GameManager gameManager)
         {
-            _gameManager = gameManager;
+            this.gameManager = gameManager;
         }
 
         #endregion

@@ -1,5 +1,6 @@
 using Fusion;
 using UnityEngine;
+using VitaliyNULL.FusionManager;
 
 namespace VitaliyNULL.Props
 {
@@ -9,6 +10,7 @@ namespace VitaliyNULL.Props
 
         // private NetworkRigidbody _rigidbody;
         private Vector3 _directionToMove;
+        private GameManager _gameManager;
         private NetworkTransform _networkTransform;
 
         #endregion
@@ -33,17 +35,8 @@ namespace VitaliyNULL.Props
 
         public override void Spawned()
         {
-            // _rigidbody ??= GetComponent<NetworkRigidbody>();
             _networkTransform ??= GetComponent<NetworkTransform>();
-
-            // if (_rigidbody.Rigidbody.rotation.y > 0 || _rigidbody.Rigidbody.rotation.y < 0)
-            // {
-            //     _directionToMove = -Vector3.forward;
-            // }
-            // else
-            // {
-            //     _directionToMove = Vector3.forward;
-            // }
+            _gameManager ??= FindObjectOfType<GameManager>();
             if (_networkTransform.transform.rotation.y > 0 || _networkTransform.transform.rotation.y < 0)
             {
                 _directionToMove = -Vector3.forward;
@@ -56,14 +49,7 @@ namespace VitaliyNULL.Props
 
         public override void FixedUpdateNetwork()
         {
-            // if (_rigidbody.Rigidbody.position.z > 6000 || _rigidbody.Rigidbody.position.z < 0)
-            // {
-            //     Runner.Despawn(Object);
-            //     return;
-            // }
-            //
-            // _rigidbody.Rigidbody.MovePosition(
-            //     _rigidbody.Rigidbody.position + _directionToMove * _speed * Runner.DeltaTime);
+            if (!_gameManager.IsGameStarted) return;
             if (_networkTransform.transform.position.z > 6000 || _networkTransform.transform.position.z < 0)
             {
                 Runner.Despawn(Object);
@@ -72,8 +58,6 @@ namespace VitaliyNULL.Props
 
             _networkTransform.transform.position = Vector3.Lerp(_networkTransform.transform.position,
                 _networkTransform.transform.position + _directionToMove * _speed * Runner.DeltaTime, 1);
-            // _networkTransform.TeleportToPosition(_networkTransform.transform.position +
-            //                                      _directionToMove * _speed * Runner.DeltaTime);
         }
 
         #endregion

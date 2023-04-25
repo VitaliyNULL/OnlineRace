@@ -94,13 +94,6 @@ namespace VitaliyNULL.FusionManager
                     runner.Spawn(Resources.Load<GameManager>(GameManagerPath), null, null, player);
                     runner.Spawn(Resources.Load<MapGenerator>(MapGeneratorPath), null, null, player);
                 }
-                //
-                // Vector3 spawnPosition =
-                //     new Vector3(3 + (player.RawEncoded % runner.Config.Simulation.DefaultPlayers) * 5, -9, 0);
-
-                // NetworkObject playerObject =
-                //     runner.Spawn(_carPrefab, spawnPosition, Quaternion.identity, player);
-                // RPC_UpdatePlayers(player, playerObject);
             }
         }
 

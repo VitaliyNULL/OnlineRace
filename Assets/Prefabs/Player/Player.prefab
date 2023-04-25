@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
+  _player: {fileID: 3185273256937894310}
 --- !u!114 &2452724948886973641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +96,7 @@ MonoBehaviour:
   _propLayer:
     serializedVersion: 2
     m_Bits: 256
+  gameManager: {fileID: 0}
   playerMove: {fileID: 2452724948886973640}
 --- !u!114 &4699167472852915026
 MonoBehaviour:
@@ -135,7 +137,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 6}
+  m_Size: {x: 2, y: 2, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2642915587694915345
 GameObject:

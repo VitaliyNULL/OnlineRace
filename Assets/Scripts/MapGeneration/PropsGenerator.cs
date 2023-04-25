@@ -30,16 +30,15 @@ namespace VitaliyNULL.MapGeneration
             int iterations = Random.Range(0, 4);
             for (int i = 0; i < iterations; i++)
             {
-                SpawnPoint spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count-1)];
+                SpawnPoint spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count - 1)];
                 while (_spawnedProps[spawnPoint])
                 {
-                    spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count-1)];
+                    spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count - 1)];
                 }
 
                 _spawnedProps[spawnPoint] = true;
                 Prop prop = spawnPoint.SpawnProp(_props[Random.Range(0, _props.Count)]);
-                // Prop prop = Runner.Spawn(props[Random.Range(0, props.Count)],
-                //     spawnPoint.transform.position, spawnPoint.gameObject.transform.rotation);
+                _spawnPoints.Remove(spawnPoint);
                 RPC_SetParent(prop);
             }
         }
