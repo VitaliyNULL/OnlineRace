@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
+using VitaliyNULL.Core;
+using VitaliyNULL.InGameUI;
 
 namespace VitaliyNULL.FusionManager
 {
@@ -9,7 +11,14 @@ namespace VitaliyNULL.FusionManager
         #region Private Fields
 
         [SerializeField] private NetworkPrefabRef _prefabRef;
-        [SerializeField] private List<Player.Player> _players = new List<Player.Player>();
+        private List<Player.Player> _players = new List<Player.Player>();
+
+        [Networked(OnChanged = nameof(OnTimerChange))]
+        private float time { get; set; }
+
+        private GameTime _gameTime;
+        private TimerUI _timerUI;
+
         private bool _isGameStarted;
 
         #endregion
@@ -25,10 +34,17 @@ namespace VitaliyNULL.FusionManager
                 {
                     //TODO: Activate counter 3.2.1.. GO
                 }
-                else
-                {
-                }
             }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private static void OnTimerChange(Changed<GameManager> changed)
+        {
+            changed.Behaviour._gameTime.SetTime(Mathf.FloorToInt(changed.Behaviour.time));
+            changed.Behaviour._timerUI.ChangeTime(changed.Behaviour._gameTime.ToString());
         }
 
         #endregion
@@ -42,6 +58,14 @@ namespace VitaliyNULL.FusionManager
             {
                 RPC_SpawnAllPlayer();
             }
+            _timerUI = FindObjectOfType<TimerUI>();
+            _gameTime = new GameTime();
+        }
+
+        public override void FixedUpdateNetwork()
+        {
+            if (!HasStateAuthority) return;
+            time += Runner.DeltaTime;
         }
 
         #endregion
@@ -71,8 +95,8 @@ namespace VitaliyNULL.FusionManager
             Debug.LogError(player.Object.Id);
             // if (player.Object.InputAuthority.PlayerId == Object.InputAuthority.PlayerId)
             // {
-                Debug.LogError(player.Object.InputAuthority.PlayerId + " " + Object.InputAuthority.PlayerId);
-                player.InitGameManager(this);
+            Debug.LogError(player.Object.InputAuthority.PlayerId + " " + Object.InputAuthority.PlayerId);
+            player.InitGameManager(this);
             // }
         }
 
