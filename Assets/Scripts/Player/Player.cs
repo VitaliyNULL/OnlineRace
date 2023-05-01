@@ -18,10 +18,22 @@ namespace VitaliyNULL.Player
         [HideInInspector] public GameManager gameManager;
         private bool _isInvulnerable;
         [SerializeField] public PlayerMove playerMove;
+        private short _currentPosition;
 
         #endregion
 
         #region Public Properties
+
+        public short CurrentPosition
+        {
+            get => _currentPosition;
+            set
+            {
+                _currentPosition = value;
+                if (HasInputAuthority)
+                    gameManager.gameUI.UpdatePlayerPosition(_currentPosition);
+            }
+        }
 
         public bool IsInvulnerable
         {

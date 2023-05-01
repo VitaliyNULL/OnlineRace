@@ -27,6 +27,12 @@ namespace VitaliyNULL.FusionManager
 
         [Networked] private bool _isGameStarted { get; set; }
 
+        //7000 just for start iteration distance
+        private float _maxDistance = 7000;
+
+        //For updating pos
+        private short _currentPos = 0;
+
         #endregion
 
         #region Public Properties
@@ -79,22 +85,26 @@ namespace VitaliyNULL.FusionManager
 
         public override void FixedUpdateNetwork()
         {
-            foreach (var player in _players)
-            {
-                if (_players[Runner.LocalPlayer].playerMove.Distance > player.Value.playerMove.Distance)
-                {
-                    gameUI.UpdatePlayerPosition(1);
-                }
-                else
-                {
-                    gameUI.UpdatePlayerPosition(2);
-                }
-            }
-
-            if (!HasStateAuthority) return;
             if (IsGameStarted)
             {
-                _time += Runner.DeltaTime;
+                foreach (var player in _players)
+                {
+                    if (player.Value.playerMove.Distance == 0) return;
+                    if (_maxDistance > player.Value.playerMove.Distance)
+                    {
+                        _maxDistance = player.Value.playerMove.Distance;
+                        player.Value.CurrentPosition = 1;
+                    }
+                    else
+                    {
+                        player.Value.CurrentPosition = 2;
+                    }
+                }
+
+                if (HasStateAuthority)
+                {
+                    _time += Runner.DeltaTime;
+                }
             }
         }
 
@@ -145,11 +155,11 @@ namespace VitaliyNULL.FusionManager
         [Rpc]
         private void RPC_UpdatePlayerList(Player.Player player)
         {
-            _players[player.Runner.LocalPlayer] = player;
-            Debug.LogError(player.Object.Id);
+            _players[player.Object.InputAuthority] = player;
+            // Debug.LogError(player.Object.Id);
             // if (player.Object.InputAuthority.PlayerId == Object.InputAuthority.PlayerId)
             // {
-            Debug.LogError(player.Object.InputAuthority.PlayerId + " " + Object.InputAuthority.PlayerId);
+            // Debug.LogError(player.Object.InputAuthority.PlayerId + " " + Object.InputAuthority.PlayerId);
             player.InitGameManager(this);
             // }
         }

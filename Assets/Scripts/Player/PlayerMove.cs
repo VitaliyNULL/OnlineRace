@@ -35,7 +35,8 @@ namespace VitaliyNULL.Player
             set
             {
                 _distance = value;
-                _player.gameManager.gameUI.UpdatePlayerDistance(_distance);
+                if (HasInputAuthority)
+                    _player.gameManager.gameUI.UpdatePlayerDistance(_distance);
             }
         }
 
@@ -79,18 +80,19 @@ namespace VitaliyNULL.Player
 
         public override void FixedUpdateNetwork()
         {
+           
             if (!_player.gameManager.IsGameStarted || _finished) return;
             _networkTransform.Transform.position = Vector3.Lerp(_networkTransform.Transform.position,
                 _networkTransform.Transform.position + Vector3.forward * ForwardSpeed * Runner.DeltaTime, 1);
 
-            if (HasInputAuthority)
-            {
+            // if (HasInputAuthority)
+            // {
                 Distance = _player.gameManager.finishTile.transform.position.z - transform.position.z;
                 if (Distance < 0)
                 {
                     RPC_Finish();
                 }
-            }
+            // }
 
             if (GetInput(out NetworkInputData data))
             {
@@ -194,7 +196,7 @@ namespace VitaliyNULL.Player
         #endregion
 
         #region RPC
-        
+
         [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority)]
         private void RPC_Finish()
         {
