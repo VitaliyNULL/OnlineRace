@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Fusion;
@@ -22,16 +23,16 @@ namespace VitaliyNULL.FusionManager
         private GameTime _gameTime;
         [HideInInspector] public TimerUI timerUI;
         [HideInInspector] public GameUI gameUI;
+        [HideInInspector] public EndRaceUI endRaceUI;
         private WaitingUI _waitingUI;
         [HideInInspector] public MapTile finishTile;
 
         [Networked] private bool _isGameStarted { get; set; }
 
         //7000 just for start iteration distance
-        private float _maxDistance = 7000;
+        [Networked] private float _maxDistance { get; set; }
 
         //For updating pos
-        private short _currentPos = 0;
 
         #endregion
 
@@ -57,6 +58,8 @@ namespace VitaliyNULL.FusionManager
 
         #region Public Methods
 
+        public GameTime GetGameTime() => _gameTime;
+
         public void SetFinish(MapTile mapTile)
         {
             finishTile = mapTile;
@@ -68,11 +71,14 @@ namespace VitaliyNULL.FusionManager
 
         public override void Spawned()
         {
+            if (!HasInputAuthority) Runner.Despawn(Object);
             timerUI = FindObjectOfType<TimerUI>();
             _waitingUI = FindObjectOfType<WaitingUI>();
             gameUI = FindObjectOfType<GameUI>();
+            endRaceUI = FindObjectOfType<EndRaceUI>();
             timerUI.gameObject.SetActive(false);
             gameUI.gameObject.SetActive(false);
+            endRaceUI.gameObject.SetActive(false);
             Debug.Log(Runner.SessionInfo.PlayerCount + "/" + Runner.SessionInfo.MaxPlayers + "Players now");
             if (Runner.SessionInfo.PlayerCount == Runner.SessionInfo.MaxPlayers)
             {
@@ -80,31 +86,33 @@ namespace VitaliyNULL.FusionManager
                 RPC_SpawnAllPlayer();
             }
 
+            _maxDistance = 7000;
             _gameTime = new GameTime();
+        }
+
+        private void Update()
+        {
+            if (!IsGameStarted) return;
+            foreach (var player in _players)
+            {
+                if (player.Value.playerMove.Distance == 0) return;
+                if (_maxDistance > player.Value.playerMove.Distance)
+                {
+                    _maxDistance = player.Value.playerMove.Distance;
+                    player.Value.CurrentPosition = 1;
+                }
+                else
+                {
+                    player.Value.CurrentPosition = 2;
+                }
+            }
         }
 
         public override void FixedUpdateNetwork()
         {
-            if (IsGameStarted)
+            if (HasStateAuthority && IsGameStarted)
             {
-                foreach (var player in _players)
-                {
-                    if (player.Value.playerMove.Distance == 0) return;
-                    if (_maxDistance > player.Value.playerMove.Distance)
-                    {
-                        _maxDistance = player.Value.playerMove.Distance;
-                        player.Value.CurrentPosition = 1;
-                    }
-                    else
-                    {
-                        player.Value.CurrentPosition = 2;
-                    }
-                }
-
-                if (HasStateAuthority)
-                {
-                    _time += Runner.DeltaTime;
-                }
+                _time += Runner.DeltaTime;
             }
         }
 
@@ -146,6 +154,7 @@ namespace VitaliyNULL.FusionManager
                 {
                     Vector3 spawnPosition =
                         new Vector3(3 + (player.RawEncoded % Runner.Config.Simulation.DefaultPlayers) * 5, -10.5f, 0);
+                    
                     NetworkObject networkObject = Runner.Spawn(_prefabRef, spawnPosition, Quaternion.identity, player);
                     RPC_UpdatePlayerList(networkObject.GetComponent<Player.Player>());
                 }

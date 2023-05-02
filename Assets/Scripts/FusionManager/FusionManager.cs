@@ -71,16 +71,6 @@ namespace VitaliyNULL.FusionManager
 
         #endregion
 
-        #region RPC
-
-        [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
-        private void RPC_UpdatePlayers(PlayerRef playerRef, NetworkObject networkObject)
-        {
-            players[playerRef] = networkObject;
-        }
-
-        #endregion
-
         #region INetworkRunnerCallbacks
 
         public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
@@ -131,6 +121,7 @@ namespace VitaliyNULL.FusionManager
 
         public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
         {
+            SceneManager.LoadScene(0);
         }
 
         public void OnConnectedToServer(NetworkRunner runner)
@@ -164,6 +155,7 @@ namespace VitaliyNULL.FusionManager
 
         public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
         {
+            runner.Shutdown();
         }
 
         public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ArraySegment<byte> data)

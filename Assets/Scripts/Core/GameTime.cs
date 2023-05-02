@@ -24,6 +24,8 @@ namespace VitaliyNULL.Core
             return string.Format($"{_minutes}:{_seconds}");
         }
 
+        public int GetTime() => _allTime;
+
         public void SetTime(int minutes, int seconds)
         {
             _allTime = seconds + minutes * 60;

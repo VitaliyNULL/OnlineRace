@@ -2,7 +2,6 @@ using System.Collections;
 using Fusion;
 using UnityEngine;
 using VitaliyNULL.Core;
-using VitaliyNULL.InGameUI;
 
 namespace VitaliyNULL.Player
 {
@@ -20,7 +19,6 @@ namespace VitaliyNULL.Player
         private float _forwardSpeed { get; set; }
         private float _multiplayerForwardSpeed { get; set; }
         private float _distance;
-        [Networked] private bool _finished { get; set; }
 
         private NetworkTransform _networkTransform;
         private bool _isPickingUpSpeed = true;
@@ -80,18 +78,18 @@ namespace VitaliyNULL.Player
 
         public override void FixedUpdateNetwork()
         {
-           
-            if (!_player.gameManager.IsGameStarted || _finished) return;
+            if (!_player.gameManager.IsGameStarted || _player.finished) return;
             _networkTransform.Transform.position = Vector3.Lerp(_networkTransform.Transform.position,
                 _networkTransform.Transform.position + Vector3.forward * ForwardSpeed * Runner.DeltaTime, 1);
 
             // if (HasInputAuthority)
             // {
-                Distance = _player.gameManager.finishTile.transform.position.z - transform.position.z;
-                if (Distance < 0)
-                {
-                    RPC_Finish();
-                }
+            Distance = _player.gameManager.finishTile.transform.position.z - transform.position.z;
+            if (Distance < 0)
+            {
+                _player.RPC_Finish();
+                _player.OpenFinishUI();
+            }
             // }
 
             if (GetInput(out NetworkInputData data))
@@ -191,17 +189,6 @@ namespace VitaliyNULL.Player
                     _networkTransform.transform.position.z), 1);
 
             _isMoving = false;
-        }
-
-        #endregion
-
-        #region RPC
-
-        [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority)]
-        private void RPC_Finish()
-        {
-            Debug.Log("You win");
-            _finished = true;
         }
 
         #endregion

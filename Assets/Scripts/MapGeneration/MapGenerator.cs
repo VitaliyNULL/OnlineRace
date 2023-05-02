@@ -49,17 +49,28 @@ namespace VitaliyNULL.MapGeneration
             int nextZ = _startZ;
             for (int i = 0; i < _tilecount; i++)
             {
-                MapTile mapTile = Runner.Spawn(_mapTiles[0], new Vector3(0, -12, nextZ), Quaternion.identity);
+                MapTile mapTile;
+                if (i == _tilecount - 10)
+                {
+                    mapTile = Runner.Spawn(_mapTiles[1], new Vector3(0, -12, nextZ), Quaternion.identity);
+                    mapTile.GenerateFinish();
+                }
+                else
+                {
+                    mapTile = Runner.Spawn(_mapTiles[0], new Vector3(0, -12, nextZ), Quaternion.identity);
+                }
+
                 RPC_UpdateSpawnedTiles(mapTile);
                 RPC_SetHierarchy(mapTile, _prevMapTile);
                 RPC_RenameTile(mapTile, i);
+
                 if (i == 0)
                 {
                     mapTile.GenerateStart();
                 }
                 else if (i == _tilecount - 10)
                 {
-                    mapTile.GenerateFinish();
+                    return;
                 }
                 else if (i > 6)
                 {
