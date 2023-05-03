@@ -6,7 +6,9 @@ using Firebase.Database;
 using UnityEngine;
 using UnityEngine.Events;
 using VitaliyNULL.Core;
+using VitaliyNULL.MenuSceneUI.LeaderBoard;
 using VitaliyNULL.MenuSceneUI.LoginAndRegistration;
+using WebSocketSharp;
 
 namespace VitaliyNULL.FirebaseManager
 {
@@ -20,7 +22,7 @@ namespace VitaliyNULL.FirebaseManager
         private FirebaseAuth _auth;
         private FirebaseUser _user;
         private DatabaseReference _dataBaseReference;
-        private bool _isInitialized;
+        public bool isInitialized;
 
         #endregion
 
@@ -28,6 +30,11 @@ namespace VitaliyNULL.FirebaseManager
 
         private void Start()
         {
+            if (FindObjectsOfType<FirebaseManager>().Length > 1)
+            {
+                Destroy(gameObject);
+            }
+
             DontDestroyOnLoad(this);
         }
 
@@ -41,9 +48,9 @@ namespace VitaliyNULL.FirebaseManager
             _dataBaseReference = FirebaseDatabase.DefaultInstance.RootReference;
         }
 
-        public void AutoLogin(string email, string password, UnityAction openMainMenu)
+        public void AutoLogin(string email, string password, UnityAction openMainMenu, UnityAction errorAuthorization)
         {
-            StartCoroutine(WaitForAutoLogin(email, password, openMainMenu));
+            StartCoroutine(WaitForAutoLogin(email, password, openMainMenu, errorAuthorization));
         }
 
         //Function for the login button
@@ -56,22 +63,29 @@ namespace VitaliyNULL.FirebaseManager
 
         //Function for the register button
         public void RegisterButton(EmailInput emailInput, PasswordInput passwordInput,
-            ConfirmPasswordInput confirmPasswordInput, WarningUI warningUI, UnityAction openMainMenu)
+            ConfirmPasswordInput confirmPasswordInput, UsernameInput usernameInput, WarningUI warningUI,
+            UnityAction openMainMenu)
         {
             //Call the register coroutine passing the email, password, and username
-            StartCoroutine(WaitForRegister(emailInput, passwordInput, confirmPasswordInput, warningUI, openMainMenu));
+            StartCoroutine(WaitForRegister(emailInput, passwordInput, confirmPasswordInput, usernameInput, warningUI,
+                openMainMenu));
         }
 
-        public void ExitAccount(UnityAction openLoginWindow)
+        public void LoadLeaderBoard(LeaderBoardContent leaderBoardContent)
+        {
+            StartCoroutine(LoadLeaderBoardData(leaderBoardContent));
+        }
+
+        public void ExitAccount(UnityAction unityAction)
         {
             _auth.SignOut();
             PlayerPrefs.DeleteAll();
             //TODO : Reset rating
             //TODO: Open login window
-            openLoginWindow.Invoke();
+            unityAction.Invoke();
         }
 
-        public void SaveData()
+        public void SaveUsernameData()
         {
             if (!_isSavingData)
             {
@@ -83,29 +97,27 @@ namespace VitaliyNULL.FirebaseManager
             }
         }
 
-        public void RegisterNewAccount()
+        public void SaveRatingData(int rating)
         {
-            _auth.SignOut();
-            // ScoreManager.Instance.ResetBestScoreForNewCustomer();
-            //TODO : reset rating for new customer
-            // UIManager.Instance.OpenRegistrationWindow();
-            //TODO: Open Registration
+            StartCoroutine(UpdateRatingDatabase(rating));
         }
 
-        public void SignInExistingAccount()
+        public void LoadData()
         {
-            _auth.SignOut();
-            // ScoreManager.Instance.ResetBestScoreForNewCustomer();
-            //TODO : reset rating for new customer
-            // UIManager.Instance.OpenAuthWindow();
-            //TODO: Open Login window
+            StartCoroutine(LoadUserData());
+        }
+
+        public void LoadData(UnityAction unityAction)
+        {
+            StartCoroutine(LoadUserData(unityAction));
         }
 
         #endregion
 
         #region Coroutines
 
-        private IEnumerator WaitForAutoLogin(string email, string password, UnityAction openMainMenu)
+        private IEnumerator WaitForAutoLogin(string email, string password, UnityAction openMainMenu,
+            UnityAction errorAuthorization)
         {
             //Call the Firebase auth signin function passing the email and password
             var loginTask = _auth.SignInWithEmailAndPasswordAsync(email, password);
@@ -146,6 +158,7 @@ namespace VitaliyNULL.FirebaseManager
                     }
 
                     Debug.Log(message);
+                    errorAuthorization.Invoke();
                 }
             }
             else
@@ -154,7 +167,9 @@ namespace VitaliyNULL.FirebaseManager
                 //Now get the result
                 _user = loginTask.Result;
                 Debug.LogFormat("User signed in successfully: {0} ({1})", _user.DisplayName, _user.Email);
+                SaveUsernameData();
                 StartCoroutine(LoadUserData());
+
                 // StartCoroutine(LoadScoreBoardData());
                 //TODO: Open MainMenu
                 openMainMenu.Invoke();
@@ -212,7 +227,9 @@ namespace VitaliyNULL.FirebaseManager
                 //Now get the result
                 _user = loginTask.Result;
                 Debug.LogFormat("User signed in successfully: {0} ({1})", _user.DisplayName, _user.Email);
+                SaveUsernameData();
                 StartCoroutine(LoadUserData());
+
                 // StartCoroutine(LoadScoreBoardData());
                 PlayerPrefs.SetString(ConstKeys.PasswordKey, passwordInput.password);
                 PlayerPrefs.SetString(ConstKeys.EmailKey, emailInput.email);
@@ -222,9 +239,14 @@ namespace VitaliyNULL.FirebaseManager
         }
 
         private IEnumerator WaitForRegister(EmailInput emailInput, PasswordInput passwordInput,
-            ConfirmPasswordInput confirmPasswordInput, WarningUI warningUI, UnityAction openMainMenu)
+            ConfirmPasswordInput confirmPasswordInput, UsernameInput usernameInput, WarningUI warningUI,
+            UnityAction openMainMenu)
         {
-            if (passwordInput.password != confirmPasswordInput.confirmPassword)
+            if (usernameInput.username.IsNullOrEmpty())
+            {
+                warningUI.ChangeWarningText("Username is empty");
+            }
+            else if (passwordInput.password != confirmPasswordInput.confirmPassword)
             {
                 //If the password does not match show a warning
                 warningUI.ChangeWarningText("Password Does Not Match!");
@@ -277,7 +299,13 @@ namespace VitaliyNULL.FirebaseManager
 
                     if (_user != null)
                     {
+                        UserProfile userProfile = new UserProfile() { DisplayName = usernameInput.username };
+                        var profileTask = _user.UpdateUserProfileAsync(userProfile);
+                        //Wait until the task completes
+                        yield return new WaitUntil(predicate: () => profileTask.IsCompleted);
                         //Create a user profile and set the username
+                        SaveUsernameData();
+                        SaveRatingData(0);
                         StartCoroutine(LoadUserData());
                         // StartCoroutine(LoadScoreBoardData());
                         PlayerPrefs.SetString(ConstKeys.PasswordKey, passwordInput.password);
@@ -316,6 +344,51 @@ namespace VitaliyNULL.FirebaseManager
             _isSavingData = false;
         }
 
+        private IEnumerator UpdateRatingDatabase(int rating)
+        {
+            var databaseTask = _dataBaseReference.Child("users")
+                .Child(_user.UserId)
+                .Child("rating")
+                .SetValueAsync(rating);
+            yield return new WaitUntil(predicate: () => databaseTask.IsCompleted);
+            if (databaseTask.Exception != null)
+            {
+                Debug.LogWarning(message: $"Failed to register task with {databaseTask.Exception}");
+            }
+            PlayerPrefs.SetInt(ConstKeys.Rating, rating);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="unityAction">If need to do something when LoadUserData</param>
+        /// <returns></returns>
+        private IEnumerator LoadUserData(UnityAction unityAction)
+        {
+            var databaseTask = _dataBaseReference.Child("users").Child(_user.UserId).GetValueAsync();
+            yield return new WaitUntil(predicate: () => databaseTask.IsCompleted);
+            if (databaseTask.Exception != null)
+            {
+                Debug.LogWarning($"Failed to register task with {databaseTask.Exception}");
+            }
+            else if (databaseTask.Result.Value == null)
+            {
+                //TODO: Set rating
+
+                PlayerPrefs.SetInt(ConstKeys.Rating, 0);
+            }
+            else
+            {
+                DataSnapshot dataSnapshot = databaseTask.Result;
+                var rating = dataSnapshot.Child("rating").Value;
+
+                //TODO: Set rating
+                PlayerPrefs.SetInt(ConstKeys.Rating, int.Parse(rating.ToString()));
+            }
+
+            unityAction.Invoke();
+        }
+
         private IEnumerator LoadUserData()
         {
             var databaseTask = _dataBaseReference.Child("users").Child(_user.UserId).GetValueAsync();
@@ -326,22 +399,23 @@ namespace VitaliyNULL.FirebaseManager
             }
             else if (databaseTask.Result.Value == null)
             {
-                //No Data exist
                 //TODO: Set rating
-                // ScoreManager.Instance.SetBestScore(0);
+
+                PlayerPrefs.SetInt(ConstKeys.Rating, 0);
             }
             else
             {
                 DataSnapshot dataSnapshot = databaseTask.Result;
-                var bestScore = dataSnapshot.Child("bestScore").Value;
+                var rating = dataSnapshot.Child("rating").Value;
+
                 //TODO: Set rating
-                // ScoreManager.Instance.SetBestScore(int.Parse(bestScore.ToString()));
+                PlayerPrefs.SetInt(ConstKeys.Rating, int.Parse(rating.ToString()));
             }
         }
 
-        private IEnumerator LoadScoreBoardData()
+        private IEnumerator LoadLeaderBoardData(LeaderBoardContent leaderBoardContent)
         {
-            var databaseTask = _dataBaseReference.Child("users").OrderByChild("bestScore").GetValueAsync();
+            var databaseTask = _dataBaseReference.Child("users").OrderByChild("rating").GetValueAsync();
             yield return new WaitUntil(predicate: () => databaseTask.IsCompleted);
             if (databaseTask.Exception != null)
             {
@@ -355,9 +429,10 @@ namespace VitaliyNULL.FirebaseManager
                 foreach (DataSnapshot childSnapshot in dataSnapshot.Children.Reverse<DataSnapshot>())
                 {
                     string username = childSnapshot.Child("username").Value.ToString();
-                    int bestScore = int.Parse(childSnapshot.Child("bestScore").Value.ToString());
+                    string rating = childSnapshot.Child("rating").Value.ToString();
                     //TODO: Add LeaderBoard element
                     // UIManager.Instance.AddScoreBoardItem(username, bestScore);
+                    leaderBoardContent.InstantiateLeaderBoardItem(username, rating);
                 }
             }
         }

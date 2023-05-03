@@ -7,7 +7,6 @@ namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
     {
         #region Private Fields
 
-        [SerializeField] private FirebaseManager.FirebaseManager _firebaseManager;
         [SerializeField] private EmailInput _emailInput;
         [SerializeField] private PasswordInput _passwordInput;
         [SerializeField] private WarningUI _warningUI;
@@ -23,8 +22,10 @@ namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
             GetComponent<Button>().onClick
                 .AddListener(() =>
                 {
-                    _firebaseManager.InitializeFirebase();
-                    _firebaseManager.LoginButton(_emailInput, _passwordInput, _warningUI, () =>
+                    FirebaseManager.FirebaseManager firebaseManager =
+                        FindObjectOfType<FirebaseManager.FirebaseManager>();
+                    firebaseManager.InitializeFirebase();
+                    firebaseManager.LoginButton(_emailInput, _passwordInput, _warningUI, () =>
                     {
                         _loginUI.SetActive(false);
                         _mainMenuUI.SetActive(true);

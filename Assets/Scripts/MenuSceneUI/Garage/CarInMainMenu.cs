@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using VitaliyNULL.Core;
 
 namespace VitaliyNULL.MenuSceneUI.Garage
 {
@@ -9,7 +10,6 @@ namespace VitaliyNULL.MenuSceneUI.Garage
 
         [SerializeField] private List<Car> _cars;
         private Car[] _carsForUse;
-        private readonly string _carSkin = "CAR_SKIN";
         private bool _isInitialized ;
 
         #endregion
@@ -26,15 +26,15 @@ namespace VitaliyNULL.MenuSceneUI.Garage
             }
 
             _isInitialized = true;
-            if (PlayerPrefs.HasKey(_carSkin))
+            if (PlayerPrefs.HasKey(ConstKeys.CarSkin))
             {
-                _carsForUse[PlayerPrefs.GetInt(_carSkin)].gameObject.SetActive(true);
-                Debug.Log($"Current car with index {PlayerPrefs.GetInt(_carSkin)}");
+                _carsForUse[PlayerPrefs.GetInt(ConstKeys.CarSkin)].gameObject.SetActive(true);
+                Debug.Log($"Current car with index {PlayerPrefs.GetInt(ConstKeys.CarSkin)}");
             }
             else
             {
-                PlayerPrefs.SetInt(_carSkin, 0);
-                _carsForUse[PlayerPrefs.GetInt(_carSkin)].gameObject.SetActive(true);
+                PlayerPrefs.SetInt(ConstKeys.CarSkin, 0);
+                _carsForUse[PlayerPrefs.GetInt(ConstKeys.CarSkin)].gameObject.SetActive(true);
             }
         }
 
@@ -47,7 +47,7 @@ namespace VitaliyNULL.MenuSceneUI.Garage
                     car.gameObject.SetActive(false);
                 }
 
-                _carsForUse[PlayerPrefs.GetInt(_carSkin)].gameObject.SetActive(true);
+                _carsForUse[PlayerPrefs.GetInt(ConstKeys.CarSkin)].gameObject.SetActive(true);
             }
         }
 

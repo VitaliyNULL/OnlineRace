@@ -6,6 +6,8 @@ namespace VitaliyNULL.Core
         public const string EmailKey = "EMAIL";
         public const string UsernameKey = "USERNAME";
         public const string CarSkin = "CAR_SKIN";
+        public const string Rating = "RATING";
+        
 
     }
 }

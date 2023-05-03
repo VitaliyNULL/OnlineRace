@@ -281,6 +281,7 @@ GameObject:
   - component: {fileID: 5970090311365801828}
   - component: {fileID: 6024488331121094463}
   - component: {fileID: 5981218519105096990}
+  - component: {fileID: 9214153831308133494}
   m_Layer: 5
   m_Name: LeaderBoardContainer
   m_TagString: Untagged
@@ -348,3 +349,17 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9214153831308133494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3785078577760899514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c53569ae124d65965d86e25a808457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _username: {fileID: 1998624111728436259}
+  _rating: {fileID: 4321059179609079880}

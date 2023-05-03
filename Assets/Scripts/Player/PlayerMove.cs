@@ -87,8 +87,17 @@ namespace VitaliyNULL.Player
             Distance = _player.gameManager.finishTile.transform.position.z - transform.position.z;
             if (Distance < 0)
             {
-                _player.finished = true;
-                _player.OpenFinishUI();
+                if (!HasStateAuthority)
+                {
+                    RPC_Finish();
+                    _player.OpenFinishUI();
+                }
+                else
+                {
+                    _player.finished = true;
+                    _player.OpenFinishUI();
+                }
+                
             }
             // }
 
@@ -189,6 +198,16 @@ namespace VitaliyNULL.Player
                     _networkTransform.transform.position.z), 1);
 
             _isMoving = false;
+        }
+
+        #endregion
+
+        #region RPC
+
+        [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority, InvokeLocal = false)]
+        private void RPC_Finish()
+        {
+            _player.finished = true;
         }
 
         #endregion

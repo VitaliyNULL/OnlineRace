@@ -11,8 +11,6 @@ namespace VitaliyNULL.MenuSceneUI.Garage
         [SerializeField] private GameObject _currentUI;
         [SerializeField] private GameObject _mainMenuUI;
         [SerializeField] private GameObject _carsInGarageUI;
-        private readonly string _carSkin = "CAR_SKIN";
-
         #endregion
 
         #region MyRegion
@@ -30,7 +28,7 @@ namespace VitaliyNULL.MenuSceneUI.Garage
         {
             GetComponent<Button>().onClick.AddListener(() =>
             {
-                PlayerPrefs.SetInt(_carSkin, (int)carEnum);
+                PlayerPrefs.SetInt(ConstKeys.CarSkin, (int)carEnum);
                 _currentUI.SetActive(false);
                 _mainMenuUI.SetActive(true);
                 _carsInGarageUI.SetActive(false);

@@ -7,7 +7,6 @@ namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
     {
         #region Private Fields
 
-        [SerializeField] private FirebaseManager.FirebaseManager _firebaseManager;
         [SerializeField] private GameObject _mainMenuUI;
         [SerializeField] private GameObject _loginUI;
 
@@ -17,7 +16,7 @@ namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
 
         private void Start()
         {
-            GetComponent<Button>().onClick.AddListener(() => _firebaseManager.ExitAccount(
+            GetComponent<Button>().onClick.AddListener(() => FindObjectOfType<FirebaseManager.FirebaseManager>().ExitAccount(
                 () =>
                 {
                     _mainMenuUI.SetActive(false);

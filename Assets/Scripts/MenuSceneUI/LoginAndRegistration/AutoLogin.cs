@@ -7,7 +7,6 @@ namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
     {
         #region Private Fields
 
-        [SerializeField] private FirebaseManager.FirebaseManager _firebaseManager;
         [SerializeField] private GameObject _loadingUI;
         [SerializeField] private GameObject _mainMenuUI;
         [SerializeField] private GameObject _registrationUI;
@@ -21,20 +20,32 @@ namespace VitaliyNULL.MenuSceneUI.LoginAndRegistration
         {
             if (PlayerPrefs.HasKey(ConstKeys.EmailKey))
             {
-                _firebaseManager.InitializeFirebase();
-                _firebaseManager.AutoLogin(PlayerPrefs.GetString(ConstKeys.EmailKey),
-                    PlayerPrefs.GetString(ConstKeys.PasswordKey),
-                    () =>
-                    {
-                        _loadingUI.SetActive(false);
-                        _mainMenuUI.SetActive(true);
-                    });
+                FirebaseManager.FirebaseManager firebaseManager = FindObjectOfType<FirebaseManager.FirebaseManager>();
+                firebaseManager.InitializeFirebase();
+                firebaseManager.AutoLogin(PlayerPrefs.GetString(ConstKeys.EmailKey),
+                    PlayerPrefs.GetString(ConstKeys.PasswordKey), OpenMainMenu, ErrorAuthorization);
             }
             else
             {
                 _loadingUI.SetActive(false);
                 _registrationUI.SetActive(true);
             }
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void OpenMainMenu()
+        {
+            _loadingUI.SetActive(false);
+            _mainMenuUI.SetActive(true);
+        }
+
+        private void ErrorAuthorization()
+        {
+            _loadingUI.SetActive(false);
+            _registrationUI.SetActive(true);
         }
 
         #endregion
