@@ -120,9 +120,10 @@ namespace VitaliyNULL.Player
 
         public void OpenFinishUI()
         {
+            if (!HasInputAuthority) return;
             _endRaceUI.ShowEndRaceUI();
             GameTime gameTime = gameManager.GetGameTime();
-            _endRaceUI.InitTimeAndScore(gameTime.ToString(), (10000 / gameTime.GetTime()).ToString());
+            _endRaceUI.InitTimeAndScore(gameTime.ToString(), (10000 / (gameTime.GetTime() / 100)).ToString());
         }
 
         public void InitGameManager(GameManager gameManager)
@@ -136,7 +137,7 @@ namespace VitaliyNULL.Player
 
         #region RPC
 
-        [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority)]
+        [Rpc(sources: RpcSources.InputAuthority, targets: RpcTargets.StateAuthority, InvokeLocal = false)]
         public void RPC_Finish()
         {
             Debug.Log("You win");

@@ -87,7 +87,7 @@ namespace VitaliyNULL.Player
             Distance = _player.gameManager.finishTile.transform.position.z - transform.position.z;
             if (Distance < 0)
             {
-                _player.RPC_Finish();
+                _player.finished = true;
                 _player.OpenFinishUI();
             }
             // }

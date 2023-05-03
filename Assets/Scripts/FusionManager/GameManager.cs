@@ -93,18 +93,15 @@ namespace VitaliyNULL.FusionManager
         private void Update()
         {
             if (!IsGameStarted) return;
-            foreach (var player in _players)
+            if (_players[0].playerMove.Distance > _players[1].playerMove.Distance)
             {
-                if (player.Value.playerMove.Distance == 0) return;
-                if (_maxDistance > player.Value.playerMove.Distance)
-                {
-                    _maxDistance = player.Value.playerMove.Distance;
-                    player.Value.CurrentPosition = 1;
-                }
-                else
-                {
-                    player.Value.CurrentPosition = 2;
-                }
+                _players[0].CurrentPosition = 2;
+                _players[1].CurrentPosition = 1;
+            }
+            else
+            {
+                _players[0].CurrentPosition = 1;
+                _players[1].CurrentPosition = 2;
             }
         }
 
@@ -154,7 +151,7 @@ namespace VitaliyNULL.FusionManager
                 {
                     Vector3 spawnPosition =
                         new Vector3(3 + (player.RawEncoded % Runner.Config.Simulation.DefaultPlayers) * 5, -10.5f, 0);
-                    
+
                     NetworkObject networkObject = Runner.Spawn(_prefabRef, spawnPosition, Quaternion.identity, player);
                     RPC_UpdatePlayerList(networkObject.GetComponent<Player.Player>());
                 }
