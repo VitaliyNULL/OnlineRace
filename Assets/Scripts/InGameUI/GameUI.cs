@@ -7,18 +7,12 @@ namespace VitaliyNULL.InGameUI
     {
         #region Private Fields
 
-        [SerializeField] private TMP_Text _nickName;
         [SerializeField] private TMP_Text _distance;
         [SerializeField] private TMP_Text _position;
 
         #endregion
 
         #region Public Methods
-
-        public void UpdatePlayerNickName(string name)
-        {
-            _nickName.text = name;
-        }
 
         public void UpdatePlayerDistance(float distance)
         {

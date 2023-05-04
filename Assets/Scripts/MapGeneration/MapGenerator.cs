@@ -70,7 +70,7 @@ namespace VitaliyNULL.MapGeneration
                 }
                 else if (i == _tilecount - 10)
                 {
-                    return;
+                    continue;
                 }
                 else if (i > 6)
                 {
@@ -131,7 +131,7 @@ namespace VitaliyNULL.MapGeneration
         private void RPC_DisableSpawnedTiles()
         {
             if (_spawnedTiles == null) return;
-            for (int i = 6; i < _tilecount; i++)
+            for (int i = 10; i < _tilecount; i++)
             {
                 _spawnedTiles[i].gameObject.SetActive(false);
             }

@@ -124,7 +124,7 @@ namespace VitaliyNULL.Player
             _endRaceUI.ShowEndRaceUI();
             GameTime gameTime = gameManager.GetGameTime();
             int score = Mathf.RoundToInt(10000 / (gameTime.GetTime() / 100));
-            _endRaceUI.InitTimeAndScore(gameTime.ToString(), score.ToString());
+            _endRaceUI.InitTimeAndScore(gameTime.ToString(), score.ToString(), _currentPosition.ToString());
             FirebaseManager.FirebaseManager firebaseManager = FindObjectOfType<FirebaseManager.FirebaseManager>();
             firebaseManager.SaveRatingData(PlayerPrefs.GetInt(ConstKeys.Rating) + score);
         }
@@ -184,6 +184,5 @@ namespace VitaliyNULL.Player
         }
 
         #endregion
-        
     }
 }

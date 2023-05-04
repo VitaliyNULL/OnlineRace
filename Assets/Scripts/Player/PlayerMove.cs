@@ -13,7 +13,13 @@ namespace VitaliyNULL.Player
         private readonly float[] _toMoveXPositions = { -8, -3, 3, 8 };
         private int _currentPositionIndex;
         private bool _isMoving;
+#if UNITY_EDITOR || UNITY_STANDALONE_WIN
         private float _sideMoveSpeed = 10f;
+#elif UNITY_ANDROID
+
+        private float _sideMoveSpeed = 20f;
+
+#endif
         private readonly float _forwardSpeedMin = 40f;
         private readonly float _forwardSpeedMax = 120f;
         private float _forwardSpeed { get; set; }
@@ -97,7 +103,6 @@ namespace VitaliyNULL.Player
                     _player.finished = true;
                     _player.OpenFinishUI();
                 }
-                
             }
             // }
 

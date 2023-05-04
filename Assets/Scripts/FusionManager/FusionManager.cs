@@ -23,11 +23,21 @@ namespace VitaliyNULL.FusionManager
         private bool _backwardMove;
         [Networked] private bool IsMapGenerated { get; set; }
 
+        private Vector2 _startTouchPos;
+        private Vector2 _swipeDelta;
+        private float _minDeltaSwipe = 60f;
+        private bool _isSwiping;
+
+        //this needs for check what swipe is larger horizontal or vertical
+        private float _horizontalSwipe;
+        private float _verticalSwipe;
+
         #endregion
 
         #region Public Fields
 
         public Dictionary<PlayerRef, NetworkObject> players = new Dictionary<PlayerRef, NetworkObject>();
+        [HideInInspector] public bool _isBrakeDown;
 
         #endregion
 
@@ -47,6 +57,14 @@ namespace VitaliyNULL.FusionManager
             _leftMove = Input.GetKey(KeyCode.A);
             _rightMove = Input.GetKey(KeyCode.D);
             _backwardMove = Input.GetKey(KeyCode.S);
+        }
+
+
+        private void ResetSwipe()
+        {
+            _isSwiping = false;
+            _startTouchPos = Vector2.zero;
+            _swipeDelta = Vector2.zero;
         }
 
         #endregion
@@ -70,6 +88,7 @@ namespace VitaliyNULL.FusionManager
         }
 
         #endregion
+        
 
         #region INetworkRunnerCallbacks
 
@@ -94,6 +113,9 @@ namespace VitaliyNULL.FusionManager
         public void OnInput(NetworkRunner runner, NetworkInput input)
         {
             NetworkInputData data = new NetworkInputData();
+            
+#if UNITY_EDITOR
+            
             if (_leftMove)
             {
                 data.ToMoveX = NetworkInputData.MoveLeft;
@@ -105,6 +127,50 @@ namespace VitaliyNULL.FusionManager
             }
 
             if (_backwardMove)
+            {
+                data.ToMoveZ = NetworkInputData.MoveBackward;
+            }
+            
+#endif
+            
+#if UNITY_ANDROID
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                _isSwiping = true;
+                _startTouchPos = Input.mousePosition;
+            }
+            else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+            {
+                ResetSwipe();
+            }
+
+            _swipeDelta = Vector2.zero;
+            if (_isSwiping)
+            {
+                _swipeDelta = Input.mousePosition;
+            }
+
+            _horizontalSwipe = Mathf.Abs(_swipeDelta.x - _startTouchPos.x);
+            _verticalSwipe = Mathf.Abs(_swipeDelta.y - _startTouchPos.y);
+            if (_horizontalSwipe > _minDeltaSwipe && _horizontalSwipe > _verticalSwipe)
+            {
+                if (_swipeDelta.x < _startTouchPos.x)
+                {
+                    //Go Left
+                    data.ToMoveX = NetworkInputData.MoveLeft;
+
+                }
+                else if (_swipeDelta.x > _startTouchPos.x)
+                {
+                    //Go right
+                    data.ToMoveX = NetworkInputData.MoveRight;
+                }
+
+                ResetSwipe();
+            }
+#endif
+
+            if (_isBrakeDown)
             {
                 data.ToMoveZ = NetworkInputData.MoveBackward;
             }

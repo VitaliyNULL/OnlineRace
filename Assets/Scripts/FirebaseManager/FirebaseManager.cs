@@ -55,20 +55,20 @@ namespace VitaliyNULL.FirebaseManager
 
         //Function for the login button
         public void LoginButton(EmailInput emailInput, PasswordInput passwordInput, WarningUI warningUI,
-            UnityAction openMainMenu)
+            UnityAction openMainMenu, UnityAction errorAction)
         {
             //Call the login coroutine passing the email and password
-            StartCoroutine(WaitForLogin(emailInput, passwordInput, warningUI, openMainMenu));
+            StartCoroutine(WaitForLogin(emailInput, passwordInput, warningUI, openMainMenu, errorAction));
         }
 
         //Function for the register button
         public void RegisterButton(EmailInput emailInput, PasswordInput passwordInput,
             ConfirmPasswordInput confirmPasswordInput, UsernameInput usernameInput, WarningUI warningUI,
-            UnityAction openMainMenu)
+            UnityAction openMainMenu, UnityAction errorAction)
         {
             //Call the register coroutine passing the email, password, and username
             StartCoroutine(WaitForRegister(emailInput, passwordInput, confirmPasswordInput, usernameInput, warningUI,
-                openMainMenu));
+                openMainMenu, errorAction));
         }
 
         public void LoadLeaderBoard(LeaderBoardContent leaderBoardContent)
@@ -177,7 +177,7 @@ namespace VitaliyNULL.FirebaseManager
         }
 
         private IEnumerator WaitForLogin(EmailInput emailInput, PasswordInput passwordInput, WarningUI warningUI,
-            UnityAction openMainMenu)
+            UnityAction openMainMenu, UnityAction errorAction)
         {
             //Call the Firebase auth signin function passing the email and password
             var loginTask = _auth.SignInWithEmailAndPasswordAsync(emailInput.email, passwordInput.password);
@@ -218,6 +218,7 @@ namespace VitaliyNULL.FirebaseManager
                     }
 
                     Debug.Log(message);
+                    errorAction.Invoke();
                     warningUI.ChangeWarningText(message);
                 }
             }
@@ -240,15 +241,17 @@ namespace VitaliyNULL.FirebaseManager
 
         private IEnumerator WaitForRegister(EmailInput emailInput, PasswordInput passwordInput,
             ConfirmPasswordInput confirmPasswordInput, UsernameInput usernameInput, WarningUI warningUI,
-            UnityAction openMainMenu)
+            UnityAction openMainMenu, UnityAction errorAction)
         {
             if (usernameInput.username.IsNullOrEmpty())
             {
+                errorAction.Invoke();
                 warningUI.ChangeWarningText("Username is empty");
             }
             else if (passwordInput.password != confirmPasswordInput.confirmPassword)
             {
                 //If the password does not match show a warning
+                errorAction.Invoke();
                 warningUI.ChangeWarningText("Password Does Not Match!");
             }
             else
@@ -288,6 +291,7 @@ namespace VitaliyNULL.FirebaseManager
                                 break;
                         }
 
+                        errorAction.Invoke();
                         warningUI.ChangeWarningText(message);
                     }
                 }
@@ -355,6 +359,7 @@ namespace VitaliyNULL.FirebaseManager
             {
                 Debug.LogWarning(message: $"Failed to register task with {databaseTask.Exception}");
             }
+
             PlayerPrefs.SetInt(ConstKeys.Rating, rating);
         }
 
@@ -407,7 +412,6 @@ namespace VitaliyNULL.FirebaseManager
             {
                 DataSnapshot dataSnapshot = databaseTask.Result;
                 var rating = dataSnapshot.Child("rating").Value;
-
                 //TODO: Set rating
                 PlayerPrefs.SetInt(ConstKeys.Rating, int.Parse(rating.ToString()));
             }
